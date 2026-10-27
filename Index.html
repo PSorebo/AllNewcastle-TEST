@@ -292,9 +292,15 @@ geocode();document.querySelector('[data-tab="kart"]').addEventListener('click',(
           const q=liked
             ? client.from('newcastle_message_likes').delete().eq('message_id',m.id).eq('user_id',currentUser.id)
             : client.from('newcastle_message_likes').insert({message_id:m.id,user_id:currentUser.id});
-          const {error:likeError}=await q;
-          if(likeError){status('chat-send-status','Kunne ikke oppdatere like: '+likeError.message,true);likeButton.disabled=false;return;}
-          await loadMessages();
+          try {
+            const {error:likeError}=await q;
+            if(likeError) throw likeError;
+            await loadMessages();
+          } catch(err) {
+            console.error('Kunne ikke oppdatere like:',err);
+            status('chat-send-status','Kunne ikke oppdatere like: '+(err?.message||'Ukjent feil'),true);
+            likeButton.disabled=false;
+          }
         };
         box.appendChild(likeButton);
         feed.appendChild(box);
