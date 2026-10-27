@@ -263,9 +263,9 @@ geocode();document.querySelector('[data-tab="kart"]').addEventListener('click',(
        const likesByMessage=new Map(), myLiked=new Set();
        if(likesAvailable && messages.length){
          const ids=messages.map(m=>m.id);
-         const {data:likes,error:likesError}=await client.from('newcastle_message_likes').select('message_id,participant_id').in('message_id',ids);
+         const {data:likes,error:likesError}=await client.from('newcastle_message_likes').select('message_id,user_id').in('message_id',ids);
          if(likesError){likesAvailable=false;console.info('Likes i felles chat er ikke aktivert i databasen ennå:',likesError.message);}
-         else for(const like of likes||[]){const k=String(like.message_id);likesByMessage.set(k,(likesByMessage.get(k)||0)+1);if(like.participant_id===myParticipant.id)myLiked.add(k);}
+         else for(const like of likes||[]){const k=String(like.message_id);likesByMessage.set(k,(likesByMessage.get(k)||0)+1);if(like.user_id===session.user.id)myLiked.add(k);}
        }
       feed.replaceChildren();
       if(!messages.length){const hint=document.createElement('p');hint.className='chat-loading';hint.textContent='Ingen meldinger ennå. Bli den første som skriver!';feed.appendChild(hint);}
@@ -289,7 +289,16 @@ geocode();document.querySelector('[data-tab="kart"]').addEventListener('click',(
           if(!myParticipant||likeButton.disabled)return;
           likeButton.disabled=true;
           const liked=myLiked.has(String(m.id));
-          const q=liked?client.from('newcastle_message_likes').delete().eq('message_id',m.id).eq('participant_id',myParticipant.id):client.from('newcastle_message_likes').insert({message_id:m.id,participant_id:myParticipant.id});
+          const q=liked
+  ? client.from('newcastle_message_likes')
+      .delete()
+      .eq('message_id',m.id)
+      .eq('user_id',session.user.id)
+  : client.from('newcastle_message_likes')
+      .insert({
+        message_id:m.id,
+        user_id:session.user.id
+     });
           const {error:likeError}=await q;
           if(likeError){status('chat-send-status','Kunne ikke oppdatere like: '+likeError.message,true);likeButton.disabled=false;return;}
           await loadMessages();
