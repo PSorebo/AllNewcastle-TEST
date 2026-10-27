@@ -265,7 +265,7 @@ geocode();document.querySelector('[data-tab="kart"]').addEventListener('click',(
          const ids=messages.map(m=>m.id);
          const {data:likes,error:likesError}=await client.from('newcastle_message_likes').select('message_id,user_id').in('message_id',ids);
          if(likesError){likesAvailable=false;console.info('Likes i felles chat er ikke aktivert i databasen ennå:',likesError.message);}
-         else for(const like of likes||[]){const k=String(like.message_id);likesByMessage.set(k,(likesByMessage.get(k)||0)+1);if(like.user_id===session.user.id)myLiked.add(k);}
+         else for(const like of likes||[]){const k=String(like.message_id);likesByMessage.set(k,(likesByMessage.get(k)||0)+1);if(like.user_id===currentUser.id)myLiked.add(k);}
        }
       feed.replaceChildren();
       if(!messages.length){const hint=document.createElement('p');hint.className='chat-loading';hint.textContent='Ingen meldinger ennå. Bli den første som skriver!';feed.appendChild(hint);}
@@ -293,11 +293,11 @@ geocode();document.querySelector('[data-tab="kart"]').addEventListener('click',(
   ? client.from('newcastle_message_likes')
       .delete()
       .eq('message_id',m.id)
-      .eq('user_id',session.user.id)
+      .eq('user_id',currentUser.id)
   : client.from('newcastle_message_likes')
       .insert({
         message_id:m.id,
-        user_id:session.user.id
+        user_id:currentUser.id
      });
           const {error:likeError}=await q;
           if(likeError){status('chat-send-status','Kunne ikke oppdatere like: '+likeError.message,true);likeButton.disabled=false;return;}
