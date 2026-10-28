@@ -1,1 +1,108 @@
-
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tilbakestill passord · AllNewcastle TEST</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#101b2b;color:#f5f7fb}
+*{box-sizing:border-box}body{max-width:620px;margin:0 auto;padding:28px 16px}a{color:#ffd35d}.card{background:#1b2c41;border:1px solid #38516a;border-radius:18px;padding:25px;margin-top:22px}h1{font-size:clamp(1.65rem,5vw,2.3rem);margin-bottom:8px}h2{font-size:1.2rem}p{line-height:1.55}.muted{color:#b3c3d3}label{display:block;margin:16px 0 5px;font-weight:650}input{display:block;width:100%;background:#101d2e;color:white;border:1px solid #71879d;border-radius:9px;padding:12px;font:inherit}button{background:#ffd35d;color:#192437;border:0;border-radius:9px;padding:12px 18px;font:inherit;font-weight:750;cursor:pointer;margin-top:16px}button:disabled{opacity:.6;cursor:wait}.hidden{display:none!important}.notice{border:1px solid #587087;background:#102137;border-radius:10px;padding:12px;margin-top:16px;overflow-wrap:anywhere}.error{border-color:#a95760;color:#ffcbcb}.success{border-color:#3c8a67;color:#baf2d2}.tag{font-size:.78rem;border:1px solid #7d9ab4;border-radius:20px;padding:4px 10px;display:inline-block}footer{margin-top:25px;font-size:.85rem;color:#b3c3d3}
+</style>
+</head>
+<body>
+<a href="../">← Til AllNewcastle TEST</a>
+<div class="card">
+<span class="tag">🔒 AllNewcastle TEST</span>
+<h1>Tilbakestill passord</h1>
+<p class="muted">Denne siden brukes til å opprette nytt passord for TEST-kontoen din. Ikke del tilbakestillingslenken med andre.</p>
+<div id="status" class="notice" role="status" aria-live="polite">Kontrollerer tilbakestillingslenken …</div>
+<section id="resetSection" class="hidden">
+<h2>Velg nytt passord</h2>
+<form id="resetForm">
+<label for="newPassword">Nytt passord</label>
+<input id="newPassword" type="password" autocomplete="new-password" minlength="12" required placeholder="Minst 12 tegn">
+<label for="confirmPassword">Gjenta nytt passord</label>
+<input id="confirmPassword" type="password" autocomplete="new-password" minlength="12" required>
+<button id="saveButton" type="submit">Lagre nytt passord</button>
+</form>
+</section>
+<section id="requestSection" class="hidden">
+<h2>Be om ny tilbakestillingslenke</h2>
+<p class="muted">Hvis lenken er utløpt eller du ikke har fått en, kan du sende en ny til e-postadressen knyttet til TEST-kontoen.</p>
+<form id="requestForm">
+<label for="email">E-postadresse</label>
+<input id="email" type="email" autocomplete="email" required placeholder="navn@firma.no">
+<button id="requestButton" type="submit">Send tilbakestillingslenke</button>
+</form>
+</section>
+<p id="afterSuccess" class="hidden"><a href="../">Gå til AllNewcastle TEST og logg inn →</a></p>
+</div>
+<footer>Dette gjelder bare TEST-miljøet. LIVE påvirkes ikke.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
+(()=>{'use strict';
+const SUPABASE_URL='https://wvnrmtcaoxzmukeokcwd.supabase.co';
+const SUPABASE_KEY='sb_publishable_KgFFfr6f1eJd1azLxx-1mg_im9MjVnA';
+const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+const $=id=>document.getElementById(id);
+const url=new URL(window.location.href);
+const hash=new URLSearchParams(url.hash.slice(1));
+const recoveryHint=hash.get('type')==='recovery'||url.searchParams.has('code')||url.searchParams.has('token_hash');
+let recoveryVerified=false,completed=false;
+function status(message,kind=''){const el=$('status');el.textContent=message;el.className='notice'+(kind?' '+kind:'');}
+function showReset(){if(completed)return;recoveryVerified=true;$('resetSection').classList.remove('hidden');$('requestSection').classList.add('hidden');status('Lenken er godkjent. Velg et nytt passord.','success');}
+function showRequest(message){if(completed||recoveryVerified)return;$('resetSection').classList.add('hidden');$('requestSection').classList.remove('hidden');status(message);}
+// Lytt før den asynkrone økten hentes, slik at PASSWORD_RECOVERY ikke overses.
+db.auth.onAuthStateChange((event,session)=>{
+ if(event==='PASSWORD_RECOVERY'&&session){showReset();}
+});
+(async()=>{
+ try{
+  // Støtter også lenker med token_hash, i tillegg til Supabase sin vanlige hash/PKCE-flyt.
+  const tokenHash=url.searchParams.get('token_hash');
+  if(tokenHash&&url.searchParams.get('type')==='recovery'){
+   const {error}=await db.auth.verifyOtp({token_hash:tokenHash,type:'recovery'});
+   if(error)throw error;
+   showReset();
+   window.history.replaceState({},'',window.location.pathname);
+   return;
+  }
+  const {data,error}=await db.auth.getSession();
+  if(error)throw error;
+  if(recoveryVerified)return;
+  if(recoveryHint&&data.session){showReset();return;}
+  if(recoveryHint){showRequest('Lenken kunne ikke bekreftes eller er utløpt. Be om en ny lenke nedenfor.');return;}
+  showRequest('Skriv inn e-postadressen din for å få en tilbakestillingslenke.');
+ }catch(e){showRequest('Kunne ikke bekrefte lenken: '+e.message+'. Be om en ny lenke nedenfor.');}
+})();
+$('resetForm').addEventListener('submit',async e=>{
+ e.preventDefault();if(!recoveryVerified)return;
+ const password=$('newPassword').value,confirmation=$('confirmPassword').value;
+ if(password.length<12){status('Passordet må ha minst 12 tegn.','error');return;}
+ if(password!==confirmation){status('Passordene er ikke like.','error');return;}
+ const btn=$('saveButton');btn.disabled=true;status('Lagrer nytt passord …');
+ try{
+  const {error}=await db.auth.updateUser({password});
+  if(error)throw error;
+  completed=true;recoveryVerified=false;$('resetSection').classList.add('hidden');$('requestSection').classList.add('hidden');$('afterSuccess').classList.remove('hidden');
+  $('newPassword').value='';$('confirmPassword').value='';
+  status('Passordet er oppdatert! Gå tilbake til AllNewcastle TEST og logg inn.','success');
+  await db.auth.signOut();
+ }catch(err){status('Kunne ikke lagre passordet: '+err.message,'error');}
+ finally{btn.disabled=false;}
+});
+$('requestForm').addEventListener('submit',async e=>{
+ e.preventDefault();const btn=$('requestButton');btn.disabled=true;
+ const email=$('email').value.trim();status('Sender tilbakestillingslenke …');
+ try{
+  const redirectTo=new URL('./',window.location.href).origin+new URL('./',window.location.href).pathname;
+  const {error}=await db.auth.resetPasswordForEmail(email,{redirectTo});
+  if(error)throw error;
+  status('Hvis e-postadressen er registrert, blir en ny tilbakestillingslenke sendt. Sjekk også søppelpost.','success');
+ }catch(err){status('Kunne ikke sende lenken: '+err.message,'error');}
+ finally{btn.disabled=false;}
+});
+})();
+</script>
+</body>
+</html>
