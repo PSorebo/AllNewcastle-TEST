@@ -162,7 +162,7 @@ async function loadChatState(){
   $('teamChat').classList.toggle('hidden',isParticipantMode()?participantView!=='teamChat':!myTeam);
   $('chatContent').classList.toggle('hidden',!chatOpen||!myTeam);
   $('chatInfo').textContent=!myTeam?'Du er ikke registrert på et lag.':chatOpen?'Åpen for '+(teams.find(t=>t.id===myTeam)?.name||'laget ditt')+'. Bare lagmedlemmer har tilgang.':'Lagchattene er stengt. Christian kan åpne dem under Challenge.';
-  if(admin){$('adminChatState').textContent='Lagchattene er '+(chatOpen?'ÅPNE':'STENGT')+'. Du kan endre dette når som helst.';$('chatOpenBtn').disabled=chatOpen;$('chatCloseBtn').disabled=!chatOpen;}
+  if(admin){$('adminChatState').textContent='Lagchattene er '+(chatOpen?'ÅPNE':'STENGT')+(challengeOpen?'.':'. Challenge er ikke startet, så lagchattene er utilgjengelige for deltakerne selv om chatbryteren er slått på.');$('chatOpenBtn').disabled=chatOpen;$('chatCloseBtn').disabled=!chatOpen;}
   if(chatOpen&&myTeam)await loadChatMessages();else {chatInitialScroll=true;revokeChatMedia();$('chatMessages').replaceChildren();$('chatFiles').value='';$('chatFileList').textContent='';}
 }
  async function loadChatMessages(){
