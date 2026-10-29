@@ -1,458 +1,433 @@
-<!doctype html><html lang="no"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0e1b2b"><title>ALL NEWCASTLE 2026 – TEST likes v3</title><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-newcastle-2026.png?v=3"><link rel="apple-touch-icon" href="icon-newcastle-2026.png?v=3"><link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""><style>
-:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#122235;background:#edf0f3}*{box-sizing:border-box}body{margin:0}header{background:#0e1b2b;color:white;padding:0;overflow:hidden}header .hero{display:block;width:100%;height:auto}header .hero-sub{padding:12px 20px 16px;text-align:center;background:#0e1b2b;color:#f1d29a;font-weight:700;letter-spacing:.5px}header small{color:#00d0ae;font-weight:800;letter-spacing:1.4px}h1{font-size:clamp(36px,10vw,58px);margin:8px 0 0;letter-spacing:-2px}header p{color:#c3ced9;margin:4px 0 16px}.pill{display:inline-block;background:#00d0ae;color:#071e29;padding:8px 14px;border-radius:30px;font-weight:800;font-size:12px}.wrap{max-width:780px;margin:auto;padding:18px 14px 90px}.count{background:#14283b;color:white;padding:18px;border-radius:16px;margin-bottom:16px}.count strong{color:#00d0ae;font-size:27px;display:block;margin:4px 0}.tabs{display:flex;gap:7px;overflow:auto;position:sticky;top:0;background:#edf0f3;padding:8px 0;z-index:2}.tabs button{flex:1;white-space:nowrap;border:0;border-radius:10px;padding:12px 10px;background:#dfe5e9;font-weight:750;color:#263849}.tabs button.active{background:#0e1b2b;color:#00d0ae}.panel{display:none}.panel.active{display:block}.card{background:white;border-radius:17px;padding:19px;margin:14px 0;box-shadow:0 3px 12px #1222350c}.card h2{font-size:21px;margin:0 0 16px}.date{color:#667584;text-transform:uppercase;font-size:12px;font-weight:800;letter-spacing:1px}.event{display:grid;grid-template-columns:73px 1fr;gap:9px;padding:13px 0;border-top:1px solid #e8edf0}.time{font-weight:850;color:#0e1b2b}.event b{display:block}.detail{font-size:13px;color:#627181;margin:4px 0}.warning{background:#fff0b8;padding:12px;border-radius:10px;margin-top:12px;font-size:13px;color:#6d5315}.map{display:inline-block;margin-top:7px;color:#006d62;font-size:13px;font-weight:800;text-decoration:none}.map:after{content:' ↗'}.muted{color:#637382;font-size:14px}.check{display:flex;align-items:flex-start;gap:12px;padding:13px 0;border-bottom:1px solid #e7ecf0}.check input{width:22px;height:22px;accent-color:#00bfa6;flex:none;margin:0}.check label{flex:1}.check input:checked+label{text-decoration:line-through;color:#71808a}.progress{height:9px;background:#e5edf0;border-radius:20px;overflow:hidden}.progress div{height:100%;background:#00cba9;width:0;transition:width .2s}.tag{display:inline-block;background:#fff0b8;color:#735900;border-radius:20px;padding:4px 9px;font-size:11px;font-weight:800;margin-top:5px}.links a{display:block;padding:12px 0;border-bottom:1px solid #e7ecf0;color:#006f64;font-weight:750;text-decoration:none}footer{text-align:center;color:#697985;font-size:12px;margin-top:20px}button{cursor:pointer} .note{font-size:13px;color:#61717e;line-height:1.5}.tabs{flex-wrap:wrap}.tabs button{flex:1 1 auto;min-width:90px}.team-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.team-links a{display:inline-block;padding:10px 12px;background:#0e1b2b;color:#fff;border-radius:9px;text-decoration:none;font-weight:750;font-size:13px}.team-links a:hover{background:#17695f}.team-links a{display:flex;align-items:center;gap:9px;min-height:54px}.team-logo{width:35px;height:39px;object-fit:contain;flex-shrink:0}.team-links{margin-top:13px}.team-links a span{line-height:1.25}.restaurant-menu{display:block;width:100%;height:auto;border-radius:10px;border:1px solid #e7ecf0;margin:12px 0}.menu-action{display:inline-block;background:#0e1b2b;color:#fff;padding:11px 15px;border-radius:10px;text-decoration:none;font-weight:750;margin:7px 0}.menu-notice{background:#fff4db;border-radius:10px;padding:12px;font-size:13px;color:#6b521a;margin-top:9px}.wings-box{margin-top:16px;padding:16px;border:1px solid #cbdedc;border-radius:14px;background:#f2f8f7}.wings-tag{font-size:11px;letter-spacing:1.1px;font-weight:850;color:#006c60}.wings-box h3{margin:8px 0;font-size:19px}.wings-box p{font-size:14px;line-height:1.5}.wings-box ul{padding-left:20px;font-size:13px;line-height:1.75}.wings-link{display:block;background:#0e1b2b;color:#fff;padding:12px;border-radius:9px;text-align:center;text-decoration:none;font-size:13px;font-weight:800}.wings-note{color:#647380;font-size:12px!important;margin-bottom:0}.chat-shortcut{display:flex;align-items:center;justify-content:center;gap:10px;background:#00cba9;color:#092337;text-decoration:none;font-size:18px;font-weight:850;padding:16px;border-radius:14px;margin:0 0 16px;box-shadow:0 3px 12px #12223516}.chat-shortcut:hover{background:#00e2ba}.chat-shortcut small{font-size:12px;font-weight:700}
-#newcastle-map{height:440px;width:100%;border-radius:14px;background:#dbe8e8;z-index:0}.map-filters{display:flex;gap:7px;overflow-x:auto;padding:12px 0}.map-filter{border:1px solid #c7d7d8;border-radius:20px;background:#fff;padding:9px 12px;white-space:nowrap;font-weight:750;color:#203444}.map-filter.active{background:#0e1b2b;color:#fff}.map-locations{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:9px;margin-top:14px}.place-card{background:#f4f8f9;border:1px solid #e2e9ec;border-radius:12px;padding:12px;text-align:left}.place-card strong{display:block;margin-bottom:5px}.place-card small{color:#5a6d77}.place-card a{display:inline-block;margin-top:9px;color:#006d62;font-size:13px;font-weight:800}.place-card button{background:none;border:0;padding:0;text-align:left;color:inherit;width:100%;font:inherit}.place-pin{border:2px solid white;border-radius:50%;height:33px;width:33px;display:flex;align-items:center;justify-content:center;font-size:17px;box-shadow:0 2px 9px #0005}.leaflet-popup-content{min-width:175px;line-height:1.5}.leaflet-popup-content a{color:#006e62;font-weight:800}.map-status{font-size:12px;color:#60717c;margin-top:9px}
-.club-mark{position:relative;width:42px;height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0;overflow:hidden;border:1px solid #ffffff55}.club-mark img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}.club-mark strong{font-size:12px;letter-spacing:.4px}.club-mark.nufc{background:repeating-linear-gradient(90deg,#fff 0 8px,#101820 8px 16px);color:#101820;text-shadow:0 1px 2px #fff}.club-mark.efc{background:#1654a8;color:white}
+<!doctype html><html lang="nb"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Newcastle Challenge · Sikker test</title><style>:root{font-family:system-ui,Arial;background:#101b2b;color:#f5f7fb}*{box-sizing:border-box}body{max-width:960px;margin:auto;padding:20px}h1{font-size:clamp(1.6rem,5vw,2.7rem)}.muted{color:#b3c3d3}.card{background:#1b2c41;border:1px solid #38516a;border-radius:18px;padding:20px;margin:14px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}button,input,textarea,select{font:inherit}button{background:#ffd35d;color:#192437;border:0;border-radius:9px;padding:10px 15px;font-weight:750;cursor:pointer;margin:5px 5px 5px 0}button:disabled{opacity:1;background:#687587;color:#d2d9e3;cursor:not-allowed;box-shadow:none}input,textarea,select{width:100%;background:#101d2e;border:1px solid #587087;border-radius:8px;color:white;padding:10px;margin:6px 0 12px}label{display:block;margin-top:10px}.pill{display:inline-block;border:1px solid #7d9ab4;border-radius:20px;padding:3px 9px;font-size:.8rem}a{color:#ffd35d}.error{color:#ffb6b6}.ok{color:#9df0c0}.score{display:flex;justify-content:space-between;border-bottom:1px solid #456;padding:8px 0}.hidden{display:none!important}.mission-done{background:#263241!important;border-color:#526173!important;opacity:.78}.mission-done h3{color:#c5ced8}.mission-done p{color:#b3c0cb}.state{display:inline-block;margin-left:8px;border-radius:18px;padding:4px 10px;font-size:.82rem;font-weight:700}.state-pending{background:#655021;color:#ffe49c}.state-approved{background:#204c3c;color:#b6f4d2}.state-rejected{background:#633239;color:#ffd0d0}.state-active{background:#254766;color:#cde9ff}.state-closed{background:#344153;color:#d3dbe5}.mission-done button{cursor:not-allowed}small{color:#afc0cf}video,img{max-width:100%}.chat-log{max-height:360px;overflow-y:auto;background:#101d2e;border:1px solid #38516a;border-radius:10px;padding:12px;margin:12px 0}.chat-msg{padding:8px 0;border-bottom:1px solid #304258;overflow-wrap:anywhere}.chat-msg:last-child{border-bottom:0}.chat-like{margin:8px 0 0;padding:5px 10px;background:#283e57;color:#e6f0fa;border:1px solid #4c6883;border-radius:20px;font-size:.82rem}.chat-like.liked{background:#ffd35d;color:#192437;border-color:#ffd35d}.chat-like:disabled{opacity:.65}.chat-like-status{margin-left:8px;font-size:.8rem;color:#ffb6b6}.chat-msg small{display:block;margin-bottom:4px}.chat-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.chat-tools button{margin:0}.chat-tools span{font-size:.9rem}.chat-status{font-weight:700}.chat-attachments{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.chat-attachments img{max-width:220px;max-height:180px;object-fit:contain;border-radius:8px}.chat-attachments video{max-width:300px;max-height:220px;border-radius:8px}.chat-attachments a{display:inline-block}.chat-file-list{font-size:.85rem;color:#b3c3d3}.dash-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:10px;margin:14px 0}.dash-stat{background:#102137;border:1px solid #3b5875;border-radius:12px;padding:14px}.dash-stat strong{display:block;font-size:1.8rem;color:#ffd35d}.dash-stat span{font-size:.86rem;color:#c2d3e4}.dash-team{padding:12px 0;border-bottom:1px solid #38516a}.dash-team:last-child{border-bottom:0}.dash-team-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.dash-progress{height:8px;background:#0e1c2c;border-radius:8px;overflow:hidden;margin-top:8px}.dash-progress>div{height:100%;background:#ffd35d;border-radius:8px}.dash-actions{display:flex;gap:8px;flex-wrap:wrap}.dash-actions button{font-size:.92rem}.dash-subtitle{margin:16px 0 6px;color:#dce7f4}.mission-control{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid #38516a}.mission-control:last-child{border-bottom:0}.mission-control button{margin:0}.mission-control .muted{font-size:.88rem}.mission-control-status{font-weight:700;color:#9df0c0}.mission-control-status.closed{color:#c2cad6}.progress-panel{margin-top:24px;border-top:1px solid #52677d;padding-top:18px}.progress-summary{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}.progress-summary span{background:#12253a;border:1px solid #49627b;border-radius:8px;padding:7px 10px}.progress-team{border:1px solid #4b6178;border-radius:12px;margin:12px 0;overflow:hidden}.progress-team summary{cursor:pointer;padding:14px;background:#233a52;font-weight:750}.progress-rows{padding:8px 12px}.progress-row{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #354a5e;padding:9px 0}.progress-row:last-child{border:0}.progress-row .progress-title{min-width:0;overflow-wrap:anywhere}.progress-status{white-space:nowrap;font-size:.83rem;font-weight:700}.progress-status.pending{color:#ffe49c}.progress-status.approved{color:#a7edc9}.progress-status.rejected{color:#ffb6b6}.progress-status.missing{color:#b5c2d0}.progress-link{background:#ffd35d;color:#192437;padding:6px 9px;font-size:.78rem;margin:0}.progress-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.progress-controls select{max-width:240px;margin:0}.progress-highlight{outline:3px solid #ffd35d;outline-offset:3px}@media(max-width:520px){.progress-row{align-items:flex-start;flex-direction:column;gap:5px}}
+/* Navigasjon for deltakere og valgfri deltakervisning for administratorer */
+.participant-nav{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0;padding:10px;background:#1b2c41;border:1px solid #38516a;border-radius:14px}
+.participant-nav button{flex:1 1 135px;margin:0;background:#283e57;color:#e6f0fa;border:1px solid #4c6883;padding:12px 8px}
+.participant-nav button.active{background:#ffd35d;color:#192437;border-color:#ffd35d}
+.participant-view[hidden],.participant-nav[hidden]{display:none!important}
+@media(max-width:640px){body{padding:12px 12px 95px}.card{padding:15px;margin:10px 0}h1{font-size:1.8rem}.participant-nav{position:fixed;bottom:0;left:0;right:0;z-index:30;margin:0;padding:8px max(8px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left));border-radius:14px 14px 0 0;background:#15273b;box-shadow:0 -5px 20px #07111eaa;gap:5px;flex-wrap:nowrap}.participant-nav button{flex:1 1 0;min-width:0;padding:9px 2px;font-size:.72rem;line-height:1.2;white-space:normal}.chat-attachments video{max-width:100%}.chat-attachments img{max-width:min(220px,100%)}}
 
-/* Newcastle felles chat */
-.chat-intro{background:#14283b;color:#fff;border-radius:16px;padding:17px;margin:0 0 16px}.chat-intro h2{margin:0 0 6px;color:#00d0ae}.chat-intro p{margin:0;color:#d6e2e7;font-size:13px}.chat-field{display:flex;flex-direction:column;gap:5px;margin:12px 0}.chat-field label{font-size:13px;font-weight:800}.chat-field input,.chat-field select,.chat-compose textarea{width:100%;border:1px solid #cbd6dd;border-radius:10px;padding:12px;font:inherit;background:#fff;color:#122235}.chat-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center}.chat-btn{border:0;border-radius:10px;background:#0e1b2b;color:#fff;padding:12px 16px;font-weight:800}.chat-btn.secondary{background:#e5edf0;color:#163044}.chat-btn:disabled{opacity:.5;cursor:wait}.chat-hint{font-size:12px;color:#60717c;line-height:1.5}.chat-error{color:#a62a2a;font-weight:750}.chat-success{color:#006d62;font-weight:750}.chat-feed{height:min(62vh,550px);min-height:300px;overflow-y:auto;background:#f5f8fa;border:1px solid #e0e8ed;border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px}.chat-message{align-self:flex-start;max-width:94%;background:#fff;border-radius:13px;padding:10px 12px;box-shadow:0 1px 5px #12223512;overflow-wrap:anywhere}.chat-message.mine{align-self:flex-end;background:#e0f8f2}.chat-message .by{font-size:12px;font-weight:850;color:#006c60}.chat-message .when{font-size:11px;color:#60717c;margin-left:7px}.chat-message p{margin:7px 0 0;white-space:pre-wrap;line-height:1.45}.chat-message img{max-width:100%;max-height:320px;display:block;border-radius:9px;margin-top:9px;object-fit:contain}.chat-compose{display:grid;gap:9px;margin-top:12px}.chat-compose textarea{min-height:80px;resize:vertical}.chat-session{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}.chat-photo{display:block;font-size:13px}.chat-loading{font-size:13px;color:#637382}.chat-invite-note{background:#fff4db;padding:10px;border-radius:9px;font-size:12px;color:#6b521a}
-.chat-like{margin-top:9px;padding:5px 10px;border:1px solid #cad9df;border-radius:20px;background:#f1f5f7;color:#30485a;font-size:12px;font-weight:750}.chat-like.liked{background:#d4f6e9;border-color:#00bfa6;color:#006d62}.chat-like:disabled{opacity:.65;cursor:wait}.chat-like-note{font-size:11px;color:#60717c;margin-top:4px}
+.mode-switch{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:12px 0}.mode-switch button{margin:0}.mode-switch button[aria-pressed="true"]{background:#ffd35d;color:#192437}.mode-switch button[aria-pressed="false"]{background:#283e57;color:#e6f0fa;border:1px solid #4c6883}.mode-switch .muted{font-size:.88rem}
+.mission-filter{margin:16px 0 10px;padding:12px 16px;background:#112237;border:1px solid #38516a;border-radius:12px}.mission-filter label{font-weight:700;margin:0 0 6px}.mission-filter select{max-width:340px;margin:4px 0}.mission-filter p{margin:3px 0;font-size:.9rem}.mission-filter .hidden{display:none!important}#challengeGate{border-color:#d6a43a;background:#352d20}#challengeGate h2{color:#ffd35d}#masterControls{border-color:#d6a43a}#masterControls button{min-width:170px}#masterStatus{font-weight:800}#masterStatus.closed{color:#ffb6b6}#masterStatus.open{color:#9df0c0}
+/* Logoer for alle 17 oppdrag – kun visuell oppgradering */
+.mission-heading{display:flex;align-items:center;gap:18px;margin:18px 0 12px}
+.mission-logo{display:block;flex:none;width:140px;height:140px;object-fit:contain;border-radius:16px;background:#101b2b;box-shadow:0 5px 16px #07111e88}
+.mission-heading h3{margin:0;line-height:1.2}
+.mission-item[data-mission-code="G01"] .mission-logo{box-shadow:0 0 0 2px #dcb84c,0 0 22px #dcb84c55}
+.mission-control-logo{width:80px;height:80px;object-fit:contain;border-radius:10px;flex:none}
+.mission-control-info{display:flex;align-items:center;gap:10px;min-width:0}
+@media(max-width:640px){.mission-heading{gap:12px}.mission-logo{width:114px;height:114px}.mission-control-logo{width:64px;height:64px}}
 
-/* Personlige flybilletter – TEST */
-.ticket-grid{display:grid;gap:9px}.ticket-row{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:11px;border:1px solid #e0e8ed;border-radius:10px;flex-wrap:wrap}.ticket-row small{display:block;color:#60717c}.ticket-actions{display:flex;gap:7px;flex-wrap:wrap}.ticket-actions button,.ticket-actions a{border:0;border-radius:9px;background:#0e1b2b;color:#fff;padding:10px 12px;text-decoration:none;font-weight:750;font-size:13px}.ticket-actions button:disabled{opacity:.5}.ticket-status{margin:10px 0;font-size:13px}.ticket-status.error{color:#a62a2a}.ticket-upload{width:100%;max-width:300px}.ticket-pill{font-size:12px;font-weight:800;color:#006d62}.ticket-pill.missing{color:#866200}
-</style></head><body>
-<header><img class="hero" src="all-newcastle-header.png" alt="ALL NEWCASTLE 2026 – Viaplay og Allente over St James’ Park og Newcastle"><div class="hero-sub">31 OKT – 3 NOV · ⚽ FOTBALL / MAT / FELLESSKAP</div></header><main class="wrap"><section class="count"><span>✈️ Avreise fra Oslo lufthavn (Gardermoen) · lørdag 31. oktober kl. 09.35</span><strong id="countdown">Beregner nedtelling …</strong><span class="muted" style="color:#c3ced9">Alle klokkeslett i programmet er lokale på reisemålet.</span></section><a class="chat-shortcut" href="#chat" id="chat-shortcut" aria-label="Åpne felles chat i All Newcastle">💬 ALL NEWCASTLE-chat <small>Åpne felles chat →</small></a><nav class="tabs" aria-label="Navigasjon"><button class="active" data-tab="program">Program</button><button data-tab="sjekkliste">Min liste</button><button data-tab="sondag">Søndagstips</button><button data-tab="deltagere">Deltagerliste</button><button data-tab="billetter">✈️ Mine flybilletter</button><button data-tab="chat">💬 Chat</button><button type="button" id="open-challenge">🏆 Challenge</button><button data-tab="hotell">Hotell</button><button data-tab="kart">Kart</button><button data-tab="info">Praktisk</button></nav><section id="program" class="panel active"></section><section id="sjekkliste" class="panel"></section><section id="sondag" class="panel"></section><section id="deltagere" class="panel"></section><section id="billetter" class="panel"></section><section id="chat" class="panel"></section><section id="hotell" class="panel"></section><section id="kart" class="panel"></section><section id="info" class="panel"></section><footer>Foreløpig reiseprogram · Oppdateres av arrangør ved ny versjon</footer></main>
-<script>
-const maps=(q)=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
-const days=[{date:'LØRDAG 31. OKTOBER',title:'Avreise og første kveld',items:[['09:35','Oslo → Amsterdam','KLM KL1198 · Ankomst Schiphol 11:30'],['12:50','Amsterdam → Newcastle','KLM KL957 · Ankomst Newcastle 13:10'],['15:00','Innsjekk på Leonardo Hotel Newcastle','Scotswood Road, NE1 4AD · se Hotell-fanen','Leonardo Hotel Newcastle Scotswood Road NE1 4AD'],['15:00–19:00','Egentid','Fri tid etter innsjekk frem til felles middag på Gaucho kl. 19:00'],['19:00','Gaucho','Signature Menu – velg retter på stedet','Gaucho Newcastle']]},{date:'SØNDAG 1. NOVEMBER',title:'Smak på Newcastle',items:[['Morgen','Frokost på Leonardo Hotel Newcastle','Scotswood Road, NE1 4AD · se Hotell-fanen'],['Dagtid','Egentid – utforsk Newcastle','Shopping, søndagsmarked, sightseeing eller puber. Se forslagene nedenfor.'],['16:30 · valgfritt','⚽ Liverpool – Arsenal på sportsbar','Premier League · britisk tid (GMT). Forslag: Shark Club, Shearer’s Bar eller WonderBar. Velg pub selv; bord og visning må bekreftes.','Shark Club Newcastle'],['19:30','My Delhi','Middag · meny må velges på forhånd','My Delhi Newcastle']]},{date:'MANDAG 2. NOVEMBER',title:'Kampdagen',items:[['Morgen','Frokost på Leonardo Hotel Newcastle','Scotswood Road, NE1 4AD · se Hotell-fanen'],['10:00–13:00','Faglig Kick off','Faglig samling · sted oppgis senere'],['13:00','Rio Brazilian Steakhouse','Tidlig middag på Quayside · reservasjon avventer bekreftelse','Rio Brazilian Steakhouse Quayside Newcastle'],['17:00–17:30','Hospitality på stadion – foreløpig','Adgang anslått 2,5–3 timer før kamp · oppmøte må bekreftes',"St James Park Newcastle"],['20:00','⚽ Newcastle United – Everton','St. James’ Park · Premier League',"St James Park Newcastle"]]},{date:'TIRSDAG 3. NOVEMBER',title:'Takk for turen',items:[['Morgen','Frokost på Leonardo Hotel Newcastle','Scotswood Road, NE1 4AD · se Hotell-fanen'],['11:00','Buss fra Leonardo Hotel Newcastle','Scotswood Road, NE1 4AD · eksakt hentepunkt bekreftes'],['13:25','Newcastle → Amsterdam','KLM KL958 · Ankomst Schiphol 15:45'],['16:25','Amsterdam → Oslo','KLM KL1205 · Ankomst Oslo lufthavn 18:10']]}];
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-document.getElementById('program').innerHTML=days.map((d,i)=>`<article class="card"><div class="date">0${i+1} · ${d.date}</div><h2>${d.title}</h2>${d.items.map(e=>`<div class="event"><div class="time">${esc(e[0])}</div><div><b>${esc(e[1])}</b><p class="detail">${esc(e[2])}</p>${e[3]?`<a class="map" target="_blank" rel="noopener" href="${maps(e[3])}">Åpne i Google Maps</a>`:''}${e[1].includes('Newcastle United – Everton')?`<div class="team-links"><a href="https://www.newcastleunited.com/en" target="_blank" rel="noopener noreferrer"><span class="club-mark nufc"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/361.png" alt="" loading="lazy" onerror="this.style.display='none'"><strong>NUFC</strong></span><span>Newcastle United ↗</span></a><a href="https://www.evertonfc.com/" target="_blank" rel="noopener noreferrer"><span class="club-mark efc"><img src="https://a.espncdn.com/i/teamlogos/soccer/500/368.png" alt="" loading="lazy" onerror="this.style.display='none'"><strong>EFC</strong></span><span>Everton FC ↗</span></a></div><section class="wings-box"><div class="wings-tag">DIN KAMPDAG · WINGS HOSPITALITY</div><h3>WINGS – St. James’ Park</h3><p>Hospitality-opplevelse med polstrede seter bak Leazes-målet og en treretters bistromeny.</p><ul><li>Øl, vin eller alkoholfri drikke ved ankomst</li><li>Forfriskninger i pausen</li><li>Varm snacks etter kampen</li><li>Før- og etterkampanalyse med en Newcastle-legende</li><li>Eksklusivt kampmerke og kampprogram</li></ul><a class="wings-link" href="https://www.newcastleunited.com/en/wings-single-match-hospitality" target="_blank" rel="noopener noreferrer">Se bilder og full beskrivelse hos Newcastle United ↗</a><p class="wings-note">Dette beskriver hospitality-pakken, ikke en personlig inngangsbillett. Eksakt inngang og oppmøtetid bekreftes separat.</p></section>`:''}</div></div>`).join('')}${i===1?`<a class="map" href="#sondag" onclick="document.querySelector('[data-tab=sondag]').click()">Se forslag til søndagsaktiviteter →</a>`:''}${d.alert?`<div class="warning">⚠️ ${esc(d.alert)}</div>`:''}</article>`).join('');
-// Restaurantmenyer fra reisefølgets opplastede dokumenter.
-document.getElementById('program').insertAdjacentHTML('beforeend',`
-<article class="card" id="gaucho-meny"><div class="date">LØRDAG 31. OKTOBER · KL. 19:00</div><h2>🥩 Gaucho – Signature Menu</h2><p class="muted">Tre retter · £75 per person. Velg én forrett, én hovedrett og én dessert. Hovedretter serveres med chips eller grønne grønnsaker med salsa verde; biff serveres med chimichurri.</p><a class="menu-action" href="gaucho-signature-menu.png" target="_blank" rel="noopener">🔎 Åpne menyen i full størrelse ↗</a><img class="restaurant-menu" src="gaucho-signature-menu.png" alt="Gaucho Signature Menu med forretter, hovedretter og desserter" loading="lazy"><p class="note">Menyen er på engelsk, slik den ble sendt inn. Informer restauranten om allergier og spesielle matbehov.</p></article>
-<article class="card" id="my-delhi-meny"><div class="date">SØNDAG 1. NOVEMBER · KL. 19:30</div><h2>🍛 My Delhi – gruppemeny</h2><p class="muted">Papadams med chutney mens vi venter. Velg én Street Plates-tallerken og én Roadside Curry per person. Curry serveres med ris, naan, chips og dal til deling.</p><a class="menu-action" href="my-delhi-group-menu.jpg" target="_blank" rel="noopener">🔎 Åpne menyen i full størrelse ↗</a><img class="restaurant-menu" src="my-delhi-group-menu.jpg" alt="My Delhi Group Menu med vegetar, vegansk og kjøttbasert street plates, samt ni curry-retter" loading="lazy"><p class="note">Menyen er på engelsk og er hentet fra bildet arrangøren har sendt inn. Oppgi allergier og spesielle matbehov til restauranten.</p></article>`);
-const suggestions=[
-['🛍️ Shopping i sentrum','Typiske søndagstider: Primark 10:30–17:00 (kun kikking før 11:00), Sports Direct 11:00–17:00 og Eldon Square 11:00–17:00. Tidene kan endres – sjekk før besøket.','Primark Northumberland Street Newcastle'],
-['🧺 Quayside Sunday Market','Åpent søndag 1. november kl. 09:30–16:00 (britisk tid). Marked langs elven med boder, småmat og hyggelig stemning. Utendørs og væravhengig; tidene kan endres.','Newcastle Quayside Market'],
-['🌉 Sightseeing til fots','Grey’s Monument, Grey Street, Newcastle Cathedral, Castle og Millennium Bridge. Ca. 4–5 km.','Grey’s Monument Newcastle'],
-['🌳 Rolig tur i Jesmond Dene','Grønn park med stier og bekk. Mulighet for en tur på ca. 5–7 km.','Jesmond Dene Newcastle'],
-['🌊 Kysttur i Tynemouth','Metro til Tynemouth, kysttur mot Cullercoats og tilbake, ca. 5–6 km.','Tynemouth Station'],
-['🍺 Puber i Ouseburn','Typiske søndagstider: The Free Trade Inn 11:00–23:00, The Tyne Bar 12:00–23:00 og The Cluny 12:00–22:30 (mat 12:00–19:00). Sjekk eventuelle endringer før besøket.','The Tyne Bar Newcastle'],
-['⚽ Premier League på sportsbar','Søndag 1. november (britisk tid / GMT): 16:30 Liverpool – Arsenal (Sky Sports). Dette er den eneste Premier League-kampen som er oppført denne søndagen. TV-sending og bordplass bør bekreftes hos Shark Club, Shearer’s Bar eller WonderBar.','Shark Club Newcastle'],
-['🎸 Musikk og uteliv','Sjekk konsertprogram hos The Cluny, Billy Bootleggers og Trillians. Arrangementer er ikke bekreftet.','The Cluny Newcastle']
-];
-document.getElementById('sondag').innerHTML=`<article class="card"><div class="date">SØNDAG 1. NOVEMBER</div><h2>Egentid – velg det du har lyst til</h2><p class="muted">Forslag til aktiviteter på dagtid før felles middag på My Delhi kl. 19.30. Ingen av aktivitetene nedenfor er obligatoriske eller bestilt.</p></article>`+suggestions.map(x=>`<article class="card"><h2>${esc(x[0])}</h2><p class="muted">${esc(x[1])}</p><a class="map" target="_blank" rel="noopener" href="${maps(x[2])}">Åpne i Google Maps</a></article>`).join('');
-const checks=[['Reisedokumenter','Gyldig pass','Godkjent britisk ETA (søk på gov.uk/eta)','Reiseforsikring','Flybilletter og innsjekking','Kampbillett / hospitality-informasjon'],['Mobil og betaling','Sjekk mobilroaming i Storbritannia','Britisk strømadapter (type G)','Bankkort / kontaktløs betaling','Lagre hotelladresse og kontaktinfo','Bli med i felles chatgruppe'],['Pakkeliste','Gode gåsko','Varm jakke og regntøy','Klær til restauranter og puber','Medisiner og personlige nødvendigheter','Sjekk stadionregler for vesker'],['Før avreise','Sjekk valg av meny på My Delhi','Sjekk oppdatert program og møtepunkter']];
-const storageKey='newcastle-2026-personlig-sjekkliste-v1';let checked={};try{checked=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{};
-const total=checks.reduce((n,g)=>n+g.length-1,0);document.getElementById('sjekkliste').innerHTML=`<article class="card"><h2>Min personlige sjekkliste</h2><p class="muted">Avkryssing lagres bare på denne telefonen/nettleseren. Andre deltakeres lister påvirkes ikke.</p><b id="progresslabel"></b><div class="progress"><div id="progressbar"></div></div></article>`+checks.map((g,gi)=>`<article class="card"><h2>${esc(g[0])}</h2>${g.slice(1).map((item,j)=>{let id=gi+'-'+j;return `<div class="check"><input type="checkbox" id="c-${id}" data-id="${id}" ${checked[id]?'checked':''}><label for="c-${id}">${esc(item)}</label></div>`}).join('')}</article>`).join('');
-function progress(){let done=Object.values(checked).filter(Boolean).length;document.getElementById('progresslabel').textContent=`${done} av ${total} fullført`;document.getElementById('progressbar').style.width=(100*done/total)+'%'}progress();document.querySelectorAll('.check input').forEach(el=>el.addEventListener('change',()=>{checked[el.dataset.id]=el.checked;try{localStorage.setItem(storageKey,JSON.stringify(checked))}catch{}progress()}));
-document.getElementById('kart').innerHTML=`<article class="card"><div class="date">📍 NEWCASTLE UPON TYNE</div><h2>Interaktivt Newcastle-kart</h2><p class="muted">Se hotellet, våre restauranter, stadion, severdigheter og puber. Trykk på en markør eller et sted nedenfor. «Veibeskrivelse» åpner Google Maps.</p><div class="map-filters" id="map-filters" aria-label="Filtrer steder"></div><div id="newcastle-map" role="application" aria-label="Interaktivt kart over Newcastle"></div><div id="map-status" class="map-status" aria-live="polite">Laster kart og finner stedene …</div><div id="map-locations" class="map-locations"></div><p class="note">Kartet bruker OpenStreetMap. Posisjoner for steder slås opp automatisk og bør kontrolleres før avreise. Faglig kick-off og bussens eksakte hentepunkt er ikke bekreftet.</p></article>`;
+/* Newcastle City Challenge · 2026 design refresh (TEST only) */
+/* Forbedret kontrast for godkjente oppdrag uten å endre oppdragsstatus. */
+.mission-item.mission-done{opacity:1!important;background:#223547!important;border-color:#477e6b!important}
+.mission-item.mission-done h3{color:#f4f9ff!important}
+.mission-item.mission-done p{color:#cbd9e6!important}
+.mission-item.mission-done .state-approved{background:#176548!important;color:#e3ffef!important;border:1px solid #58d5a0;font-weight:850;box-shadow:0 0 0 2px #58d5a018}
+.mission-item.mission-done .mission-logo{filter:none;opacity:1}
 
-const participants=[['Maskineriet',['Sebastian Nenseth','Benjamin Thuve','Fritz Ryan Domingo','Frode Hegg']],['Muon',['Fayez Fadie','Benjamin Johannessen','Filips Grindulis','Marius Horni','Sarkawt Kareemi','Stian Abrahamsen']],['Saola',['Kenneth Hårsaker','Nicklas Huse','Børre Syversen']],['Allente Norge',['Sondre Thorsen','Christian Sjøsaasen','Petter Sørebø']],['Viaplay',['Mats Hovland']],['Global Connect',['Erik Bjerke']]];
-document.getElementById('deltagere').innerHTML=`<article class="card"><h2>👥 Deltagerliste</h2><p class="muted">${participants.reduce((n,g)=>n+g[1].length,0)} registrerte deltagere fordelt på ${participants.length} selskaper.</p></article>`+participants.map(([company,names])=>`<article class="card"><div class="date">${esc(company)} · ${names.length} deltagere</div><h2>${esc(company)}</h2>${names.map((name,i)=>`<div class="event" style="grid-template-columns:30px 1fr"><div class="time">${i+1}</div><div>${esc(name)}</div></div>`).join('')}</article>`).join('');
-document.getElementById('hotell').innerHTML=`<article class="card"><div class="date">🏨 Vårt hotell · 31. oktober – 3. november</div><h2>Leonardo Hotel Newcastle</h2><p><strong>Scotswood Road, Newcastle upon Tyne, NE1 4AD</strong></p><p class="muted">Sentralt hotell nær Newcastle Central Station, Centre for Life og Discovery Museum. Hotellet har 274 rom, døgnåpen resepsjon, bagasjeoppbevaring, gratis Wi-Fi, restaurant og bar.</p><div class="links"><a target="_blank" rel="noopener" href="${maps('Leonardo Hotel Newcastle Scotswood Road NE1 4AD')}">📍 Åpne hotellet i Google Maps ↗</a><a target="_blank" rel="noopener" href="https://www.leonardo-hotels.com/newcastle/leonardo-hotel-newcastle">🌐 Hotellets offisielle nettside ↗</a><a href="tel:+441912014400">📞 Ring hotellet: +44 191 201 4400</a></div></article><article class="card"><h2>🕒 Innsjekk og frokost</h2><div class="event"><div class="time">15:00</div><div><b>Innsjekk fra</b><p class="detail">Lørdag 31. oktober. Tidlig innsjekk er ikke bekreftet; spør om bagasjeoppbevaring ved ankomst.</p></div></div><div class="event"><div class="time">11:00</div><div><b>Utsjekk senest</b><p class="detail">Tirsdag 3. november. Buss er satt opp kl. 11:00 – planlegg utsjekk før avgang.</p></div></div><div class="event"><div class="time">07–11</div><div><b>Frokost søndag</b><p class="detail">Kontinental fra 07:00, varm frokost fra 07:30 til 11:00.</p></div></div><div class="event"><div class="time">06:30</div><div><b>Frokost mandag og tirsdag</b><p class="detail">Kontinental 06:30–09:30, varm frokost 07:00–09:30. Bekreft om frokost inngår i bookingen.</p></div></div></article><article class="card"><h2>🍽️ Mat, bar og fasiliteter</h2><p>Hotellet har <b>The Bar and Grill at Leonardo’s</b>, med blant annet burgere, pizza og grillretter. Baren passer for en uformell samling etter dagens program.</p><p>Restaurantmiddag normalt 18:00–21:30. Barmat normalt 12:00–21:30.</p><p>På rommene: TV, te- og kaffefasiliteter, strykejern og strykebrett. Ingen minibar eller kjøleskap.</p><p class="note">Vanlige hotelltider og fasiliteter hentet fra hotellets nettsider. Sjekk eventuelle endringer direkte med hotellet.</p></article>`;
-document.getElementById('info').innerHTML=`<article class="card"><h2>Praktisk informasjon</h2><div class="links"><a target="_blank" rel="noopener" href="https://www.gov.uk/eta">🇬🇧 Søk britisk ETA – offisiell side ↗</a><a target="_blank" rel="noopener" href="https://www.gov.uk/foreign-travel-advice">🇬🇧 Britiske reiseråd ↗</a></div><p>💷 Valuta: britiske pund (GBP)</p><p>🕐 Newcastle ligger én time bak Norge.</p><p>🔌 Strømkontakt: type G.</p><p>🚶 Sentrum er kompakt, men husk gode sko.</p><p class="note">Sjekk oppdatert ETA-pris og innreiseregler på den offisielle nettsiden. Programmet er foreløpig og kan endres.</p></article>`;
-document.getElementById('open-challenge').addEventListener('click',()=>{location.href='challenge-test/';});
-document.querySelectorAll('[data-tab]').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===b.dataset.tab))}));
-function countdown(){let t=Date.parse('2026-10-31T09:35:00+01:00'),delta=t-Date.now(),el=document.getElementById('countdown');if(delta<=0){el.textContent='Turen er i gang! ✈️';return}let days=Math.floor(delta/864e5),hrs=Math.floor(delta%864e5/36e5),mins=Math.floor(delta%36e5/6e4);el.textContent=`${days} dager · ${hrs} timer · ${mins} min`;}countdown();setInterval(countdown,60000);
-
-// Aktivitetsvalg lagres kun på denne telefonen.
-const voteStore='newcastle-2026-sondag-valg';
-let myVotes={};try{myVotes=JSON.parse(localStorage.getItem(voteStore)||'{}')}catch{}
-const voteArea=document.createElement('article');voteArea.className='card';
-voteArea.innerHTML=`<h2>🙋 Mine søndagsaktiviteter</h2><p class="muted">Kryss av det du har lyst til å gjøre. Valgene lagres bare på din telefon.</p><div id="vote-options"></div>`;
-document.getElementById('sondag').insertBefore(voteArea,document.getElementById('sondag').children[1]||null);
-const voteOptions=document.getElementById('vote-options');
-function renderVotes(){voteOptions.innerHTML=suggestions.map((a,i)=>`<div class="check"><input type="checkbox" data-vote="${i}" id="vote-${i}" ${myVotes[i]?'checked':''}><label for="vote-${i}"><b>${esc(a[0])}</b></label></div>`).join('');voteOptions.querySelectorAll('[data-vote]').forEach(e=>e.addEventListener('change',()=>{myVotes[e.dataset.vote]=e.checked;try{localStorage.setItem(voteStore,JSON.stringify(myVotes))}catch{}}));}
-renderVotes();
-</script><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
-<script>
-(()=>{
-const places=[
-['hotel','🏨','Leonardo Hotel Newcastle','Hotell','Scotswood Road · 31. okt.–3. nov.','Leonardo Hotel Newcastle Scotswood Road Newcastle NE1 4AD'],
-['mat','🥩','Gaucho Newcastle','Restaurant','Lørdag 31. oktober kl. 19:00','Gaucho Newcastle upon Tyne'],
-['mat','🍛','My Delhi','Restaurant','Søndag 1. november kl. 19:30','My Delhi Newcastle upon Tyne'],
-['mat','🍖','Rio Brazilian Steakhouse Quayside','Restaurant','Mandag 2. november kl. 13:00 · avventer bekreftelse','Rio Brazilian Steakhouse Quayside Newcastle upon Tyne'],
-['kamp','⚽','St. James’ Park','Fotball','Newcastle–Everton · mandag kl. 20:00','St James Park Newcastle upon Tyne'],
-['se','🌉','Tyne Bridge','Severdighet','Ikonisk bro over Tyne','Tyne Bridge Newcastle upon Tyne'],
-['se','🌊','Newcastle Quayside','Severdighet','Elvepromenade og restauranter','Newcastle Quayside'],
-['se','🌉','Gateshead Millennium Bridge','Severdighet','Gang- og sykkelbro over elven','Gateshead Millennium Bridge'],
-['se','🏛️','Grey’s Monument','Severdighet','Sentrum og godt møtested','Greys Monument Newcastle upon Tyne'],
-['se','🏰','Newcastle Castle','Severdighet','Historisk borg nær elven','Newcastle Castle Newcastle upon Tyne'],
-['se','🛍️','Eldon Square','Shopping','Butikker midt i sentrum','Eldon Square Newcastle upon Tyne'],
-['se','🛍️','Grainger Market','Shopping','Historisk innendørsmarked','Grainger Market Newcastle upon Tyne'],
-['pub','🍺','Shearer’s Bar','Pub / sportsbar','Aktuell før kamp eller for TV-fotball','Shearers Bar Newcastle upon Tyne'],
-['pub','📺','Shark Club','Pub / sportsbar','Mulig sted å se fotball søndag','Shark Club Newcastle upon Tyne'],
-['pub','🍺','The Tyne Bar','Pub','Ouseburn-området','The Tyne Bar Newcastle upon Tyne'],
-['pub','🍺','The Free Trade Inn','Pub','Utsikt over Tyne','Free Trade Inn Newcastle upon Tyne']
-];
-const groupNames={alle:'Alle',hotel:'🏨 Hotell',mat:'🍽️ Restauranter',kamp:'⚽ Stadion',se:'🏛️ Severdigheter',pub:'🍺 Puber'};
-const groupColors={hotel:'#008d7e',mat:'#b57920',kamp:'#181f2a',se:'#176da1',pub:'#8148a5'};
-let active='alle',map,markers=[],loaded=0;
-const filters=document.getElementById('map-filters'),cards=document.getElementById('map-locations'),status=document.getElementById('map-status');
-const gm=q=>'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
-const directions=q=>'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(q)+'&travelmode=walking';
-function visible(p){return active==='alle'||p[0]===active}
-function redraw(){
- filters.innerHTML=Object.entries(groupNames).map(([k,v])=>`<button class="map-filter ${k===active?'active':''}" data-map-filter="${k}" aria-pressed="${k===active}">${v}</button>`).join('');
- filters.querySelectorAll('button').forEach(b=>b.onclick=()=>{active=b.dataset.mapFilter;redraw()});
- cards.innerHTML='';markers.forEach(({p,m})=>{if(map){if(visible(p))m.addTo(map);else map.removeLayer(m)}});
- places.filter(visible).forEach(p=>{let card=document.createElement('div');card.className='place-card';let button=document.createElement('button');button.innerHTML=`<strong>${p[1]} ${p[2]}</strong><small>${p[4]}</small>`;button.onclick=()=>{let found=markers.find(x=>x.p===p);if(found&&map){map.setView(found.m.getLatLng(),16);found.m.openPopup()}else window.open(gm(p[5]),'_blank','noopener')};card.appendChild(button);let a=document.createElement('a');a.href=directions(p[5]);a.target='_blank';a.rel='noopener noreferrer';a.textContent='🚶 Veibeskrivelse ↗';card.appendChild(a);cards.appendChild(card)});
+:root{--gold:#ffd35d;--navy:#101b2b;--panel:#1b2c41;--line:#3c5570}
+body{max-width:1120px;background:radial-gradient(ellipse at 85% 0%,#263d57 0,transparent 40%),#101b2b;min-height:100vh}
+.card{border-radius:22px;border-color:#405a73;box-shadow:0 12px 30px #08132230}
+h1{letter-spacing:-.045em}h2{letter-spacing:-.025em}button{transition:filter .15s ease,transform .15s ease}button:not(:disabled):hover{filter:brightness(1.08);transform:translateY(-1px)}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #ffd35d;outline-offset:3px}
+.challenge-hero{background:linear-gradient(135deg,#283e57,#142539 66%);border:1px solid #66809a;border-radius:22px;padding:22px;margin:14px 0 20px;position:relative;overflow:hidden}
+.challenge-hero:before{content:'🏆';position:absolute;right:18px;top:6px;font-size:6rem;opacity:.12;pointer-events:none}
+.hero-eyebrow{text-transform:uppercase;letter-spacing:.14em;color:#ffd35d;font-size:.73rem;font-weight:850}
+.challenge-hero h2{margin:8px 0;font-size:clamp(1.5rem,4vw,2.2rem)}.hero-team{color:#c6d6e7;margin:4px 0 15px}
+.hero-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.hero-stat{padding:12px;background:#0e1c2d9e;border:1px solid #46617a;border-radius:13px}.hero-stat strong{display:block;font-size:1.55rem;color:#ffd35d}.hero-stat span{font-size:.78rem;color:#c2d3e4}
+.hero-progress{height:9px;background:#0b1726;border-radius:99px;overflow:hidden;margin-top:15px}.hero-progress div{height:100%;background:linear-gradient(90deg,#e6b745,#ffe69b);border-radius:99px}.hero-foot{font-size:.82rem;color:#c7d7e6;margin-top:7px}
+#scores .score{background:#14283d;border:1px solid #3d5671;border-radius:13px;padding:13px 16px;margin:8px 0;align-items:center;gap:10px}#scores .score.top-three{border-color:#a48c56;background:linear-gradient(100deg,#2c3543,#182b3d)}#scores .score.own-team{outline:2px solid #ffd35d}#scores .score strong{color:#ffe19a;white-space:nowrap}#scores .score .rank-medal{font-size:1.4rem;margin-right:10px}
+.mission-item{position:relative;overflow:hidden;transition:border-color .15s}.mission-item:not(.mission-done):hover{border-color:#b79a58}.mission-item[data-mission-code="G01"]{border:2px solid #d7b04c;background:linear-gradient(145deg,#3b3329,#1b2c41 65%)}.mission-item[data-mission-code="G01"]:before{content:'🌟 GOLDEN MISSION';display:block;color:#ffe098;letter-spacing:.11em;font-size:.75rem;font-weight:850;margin-bottom:12px}.mission-item .pill{border-color:#bda56b;color:#ffe3a3;font-weight:750}.mission-item .mission-heading{margin-top:15px}.mission-item .mission-logo{border:1px solid #526981}.mission-item form button{width:100%;padding:13px}
+#teamChat .chat-log{border-radius:16px;padding:15px;background:#101c2b;max-height:430px}#teamChat .chat-msg{background:#223750;border:1px solid #3d5873;border-radius:14px;padding:12px;margin:10px 0;max-width:93%}#teamChat .chat-msg:has(.chat-like.liked){border-color:#9a8655}#teamChat .chat-msg small{color:#b7cbe0;font-size:.75rem}#teamChat #chatForm{background:#16283c;border:1px solid #405a73;padding:15px;border-radius:16px}#chatText{margin-bottom:8px}#teamChat h2:before{content:'💬 ';}
+#admin,#adminControls{border-color:#71859a}#adminDashboard .dash-stat{border-radius:16px;background:linear-gradient(145deg,#19344c,#102137)}#adminDashboard .dash-stat strong{font-size:2rem}#adminControls>h2:first-child{border-bottom:1px solid #4c6580;padding-bottom:12px}#adminChatState{padding:12px 14px;background:#11253b;border:1px solid #405b74;border-radius:12px}#queue>.card{background:#172b40;border-left:4px solid #ffd35d}
+.participant-nav button{border-radius:12px}#scoresPanel>h2:before{content:'🏅 ';}#missionsPanel>h2:before{content:'🗺️ ';}
+@media(max-width:640px){.challenge-hero{padding:16px;border-radius:18px}.hero-stats{gap:6px}.hero-stat{padding:9px 7px}.hero-stat strong{font-size:1.2rem}.hero-stat span{font-size:.69rem}#scores .score{padding:11px}#scores .score strong{font-size:.85rem}.mission-item .mission-heading{align-items:flex-start}#teamChat .chat-msg{max-width:100%}}
+</style></head><body><nav aria-label="AllNewcastle navigasjon" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:0 0 16px"><a href="../" style="display:inline-block;background:#263d55;border:1px solid #587087;border-radius:10px;padding:10px 14px;text-decoration:none;font-weight:700">← AllNewcastle · Program og felles chat</a><span class="pill">TEST · Newcastle City Challenge</span></nav><header><p><a href="../">← Tilbake til AllNewcastle TEST</a></p><p class="pill">🔒 PRIVAT TEST · Ikke publiser i hovednettsiden</p><h1>🏆 Newcastle City Challenge</h1><p class="muted">Test av ekte innsending, medieopplasting, administratorgodkjenning og poengtavle.</p></header><section class="card" id="login"><h2>Logg inn i Newcastle Challenge</h2><p>Bruk den samme PIN-innloggingen som på AllNewcastle. Etter innlogging går du tilbake hit via «🏆 Challenge».</p><p><a href="../#chat" style="display:inline-block;background:#ffd35d;color:#192437;border-radius:9px;padding:12px 16px;text-decoration:none;font-weight:800">🔐 Logg inn med PIN på AllNewcastle</a></p><details><summary style="cursor:pointer;color:#b3c3d3">Alternativ testinnlogging for administrator</summary><h3>Testkonto</h3><label>E-post<input type="email" id="email" autocomplete="username"></label><label>Testpassord<input type="password" id="password" autocomplete="current-password"></label><button id="loginBtn">Logg inn</button><p id="loginMsg" role="status"></p></details></section><section id="challengeGate" class="card hidden" role="status" aria-live="polite"><h2>🔒 Newcastle Challenge er ikke startet ennå</h2><p>Christian åpner konkurransen når alle lag er klare. Oppgaver, poengtavle og lagchat er utilgjengelige frem til da.</p><button id="gateRefresh" type="button">🔄 Sjekk om konkurransen er startet</button><p id="gateStatus" class="muted"></p></section><main id="app" class="hidden"><section id="masterControls" class="card hidden"><h2>🏁 Christians hovedbryter</h2><p id="masterStatus" role="status" aria-live="polite"></p><p class="muted">Kun Christian kan starte eller stoppe hele Challenge. Når den er stengt, har vanlige deltakere ikke tilgang. Lagchat har i tillegg sin egen bryter.</p><div id="masterButtons" class="hidden"><button id="masterOpenBtn" type="button">🟢 Start Challenge</button><button id="masterCloseBtn" type="button">🔴 Stopp Challenge</button></div><p id="masterFeedback" role="status"></p></section><div class="card"><span id="who"></span><button id="logout">Logg ut</button><p id="message" role="status"></p></div><div id="modeSwitch" class="card hidden"><strong>👁️ Velg visning</strong><div class="mode-switch"><button id="showAdminMode" type="button" aria-pressed="true">🛡️ Administratorvisning</button><button id="showParticipantMode" type="button" aria-pressed="false">📱 Deltakervisning</button></div><p class="muted">Bytt visning når som helst. Administratorrettighetene dine beholdes.</p></div><div id="admin" class="card hidden"><h2>📊 Christians Challenge Dashboard</h2><p class="muted">Oppdateres fra registrerte oppdrag, innsendelser og poengtavlen.</p><section id="goldenEditor" class="card hidden" style="border:2px solid #d7b04c;background:#292d38">
+<h3>🌟 Golden Mission – Christians hemmelige bonusoppgave</h3>
+<p class="muted">Skriv oppgaven underveis. Utkastet er privat og blir ikke synlig for lagene før du publiserer.</p>
+<label for="goldenTitle">Oppgavens navn<input id="goldenTitle" maxlength="160" placeholder="Navn på bonusoppgaven"></label>
+<label for="goldenDescription">Beskrivelse<textarea id="goldenDescription" rows="5" maxlength="4000" placeholder="Hva skal lagene gjøre?"></textarea></label>
+<label for="goldenPoints">Maks poeng<input id="goldenPoints" type="number" min="1" max="1000" step="1" value="30"></label>
+<p id="goldenStatus" role="status" class="muted"></p>
+<button id="goldenSave" type="button">💾 Lagre privat utkast</button>
+<button id="goldenPublish" type="button">🌟 Publiser og åpne Golden Mission</button>
+<button id="goldenClose" type="button">🔒 Steng Golden Mission</button>
+</section><section class="card" id="revealControls"><h3>🏆 Finaleresultater</h3><p id="revealStatus" class="muted">Laster status …</p><div id="revealButtons" class="hidden"><button type="button" id="revealOpen">🟢 Vis poengtavlen for alle</button><button type="button" id="revealClose">🔒 Skjul poengtavlen for alle</button></div><p class="muted">Christian bestemmer når poengtavlen skjules for alle lag. Kun Christian kan vise den igjen. Administratorene ser alltid resultatene.</p></section><div id="adminDashboard"></div><section class="progress-panel" id="teamProgress"><h3>📋 Lagenes fremdrift</h3><p class="muted">Alle lag og oppgaver, inkludert Golden Mission. Trykk på et lag for detaljer.</p><div class="progress-controls"><label for="progressFilter">Vis oppgaver<select id="progressFilter"><option value="all">Alle oppgaver</option><option value="pending">Kun til vurdering</option><option value="missing">Kun ikke levert</option></select></label></div><div id="progressContent"></div></section></div><nav id="participantNav" class="participant-nav hidden" aria-label="Deltakermeny"><button type="button" data-view="missions" class="active">🎯 Oppgaver</button><button type="button" data-view="scores">📊 Poengtavle</button><button type="button" data-view="teamChat">💬 Lagchat</button><button type="button" data-view="own">📨 Mine svar</button></nav><section id="challengeHero" class="challenge-hero hidden" aria-label="Min konkurranseoversikt"><div class="hero-eyebrow">Newcastle City Challenge · TEST</div><h2 id="heroTitle">Klar for konkurransen?</h2><p id="heroTeam" class="hero-team"></p><div class="hero-stats"><div class="hero-stat"><strong id="heroRank">–</strong><span>Plassering</span></div><div class="hero-stat"><strong id="heroPoints">0</strong><span>Poeng</span></div><div class="hero-stat"><strong id="heroDone">0/17</strong><span>Fullført</span></div></div><div class="hero-progress" aria-hidden="true"><div id="heroProgressFill" style="width:0%"></div></div><div id="heroFoot" class="hero-foot"></div></section><div id="scoresPanel" class="card"><h2>📊 Poengtavle</h2><div id="scores">Laster …</div><button id="refresh">Oppdater</button></div><div id="missionsPanel" class="card"><h2>🎯 Oppgaver</h2><p class="muted">Bare aktive oppgaver kan sendes inn. Administrator kan åpne og stenge oppgaver i dashboardet.</p><div class="mission-filter" id="missionFilter"><label for="missionFilterSelect">Vis oppgaver</label><select id="missionFilterSelect"><option value="available">🟢 Tilgjengelige oppgaver</option><option value="completed">✅ Mine fullførte</option><option value="all">📋 Alle oppgaver</option></select><p id="missionFilterCount" class="muted" aria-live="polite"></p></div><div id="missions"></div></div><div id="ownPanel" class="card"><h2>📨 Mine innsendelser</h2><div id="own"></div></div><div id="teamChat" class="card hidden"><h2>🔒 Min lagchat</h2><p id="chatInfo" class="muted"></p><div id="chatContent" class="hidden"><div id="chatMessages" class="chat-log" aria-live="polite"></div><form id="chatForm"><label for="chatText">Melding til laget</label><textarea id="chatText" maxlength="2000" rows="3" placeholder="Skriv til laget ditt … (valgfritt med vedlegg)"></textarea><label for="chatFiles">📎 Bilder og videoer (maks 5 filer, 50 MB per fil)<input id="chatFiles" type="file" multiple accept="image/jpeg,image/png,image/webp,image/heic,image/heif,video/mp4,video/quicktime,video/webm"></label><div id="chatFileList" class="chat-file-list"></div><div class="chat-tools"><button type="submit" id="chatSend">💬 Send melding</button><button type="button" id="chatRefresh">Oppdater chat</button><span id="chatFeedback" role="status"></span></div></form></div></div><div id="adminControls" class="card hidden"><h2>🔐 Styring av lagchatter</h2><p id="adminChatState" class="muted">Laster status …</p><button id="chatOpenBtn" type="button">🔓 Åpne lagchatter</button><button id="chatCloseBtn" type="button">🔒 Steng lagchatter</button><h2>🛡️ Administrator – godkjenning</h2><div id="queue"></div></div></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script>
+(()=>{'use strict';const URL='https://wvnrmtcaoxzmukeokcwd.supabase.co',KEY='sb_publishable_KgFFfr6f1eJd1azLxx-1mg_im9MjVnA';const db=window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true}});const $=id=>document.getElementById(id);const safe=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));let participantView="missions",adminMode="admin";let missionFilter='available';let me=null,admin=false,challengeOpen=false,isChristian=false,loading=false,myTeam=null,teams=[],missions=[],submissions=[],chatOpen=false,chatConfiguredOpen=false,chatBusy=false,chatRefreshBusy=false,chatMediaUrls=[],chatInitialScroll=true,chatForceBottom=false;const CHAT_BUCKET='challenge-chat-media',CHAT_TYPES=new Set(['image/jpeg','image/png','image/webp','image/heic','image/heif','video/mp4','video/quicktime','video/webm']);function revokeChatMedia(){for(const url of chatMediaUrls)URL_REVOKE(url);chatMediaUrls=[]}const URL_REVOKE=url=>URL_OBJ.revokeObjectURL(url),URL_OBJ=window.URL;const tell=(s,err=false)=>{$('message').textContent=s;$('message').className=err?'error':'ok'};async function check(q){if(q.error)throw q.error;return q.data}async function rpc(name,args){return check(await db.rpc(name,args))}function isParticipantMode(){return !admin || adminMode==='participant'}
+function setParticipantView(view){
+  if(!['missions','scores','teamChat','own'].includes(view))return;
+  participantView=view;
+  if(!isParticipantMode())return;
+  if(view==='teamChat')chatForceBottom=true;
+  const ids={missions:'missionsPanel',scores:'scoresPanel',teamChat:'teamChat',own:'ownPanel'};
+  for(const [key,id] of Object.entries(ids))$(id).classList.toggle('hidden',key!==view);
+  if(view==='teamChat')requestAnimationFrame(()=>{const log=$('chatMessages');log.scrollTop=log.scrollHeight;chatForceBottom=false});
+  $('participantNav').querySelectorAll('button[data-view]').forEach(btn=>{
+    const selected=btn.dataset.view===view;
+    btn.classList.toggle('active',selected);
+    btn.setAttribute('aria-current',selected?'page':'false');
+  });
 }
-redraw();
-if(typeof L==='undefined'){status.textContent='Karttjenesten er ikke tilgjengelig akkurat nå. Bruk lenkene til veibeskrivelse nedenfor.';return}
-map=L.map('newcastle-map',{scrollWheelZoom:false}).setView([54.974,-1.613],13);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap-bidragsytere'}).addTo(map);
-const store='allnewcastle-map-coordinates-v1';let cache={};try{cache=JSON.parse(localStorage.getItem(store)||'{}')}catch{}
-function pin(p,lat,lon){if(!Number.isFinite(lat)||!Number.isFinite(lon)||lat<54.8||lat>55.2||lon< -1.9||lon> -1.3)return;
-let icon=L.divIcon({className:'',html:`<div class="place-pin" style="background:${groupColors[p[0]]}">${p[1]}</div>`,iconSize:[33,33],iconAnchor:[16,16]});let m=L.marker([lat,lon],{icon});
-let wrap=document.createElement('div');let title=document.createElement('strong');title.textContent=p[2];wrap.appendChild(title);wrap.appendChild(document.createElement('br'));wrap.appendChild(document.createTextNode(p[4]));wrap.appendChild(document.createElement('br'));let a=document.createElement('a');a.textContent='🚶 Få veibeskrivelse ↗';a.href=directions(p[5]);a.target='_blank';a.rel='noopener noreferrer';wrap.appendChild(a);m.bindPopup(wrap);markers.push({p,m});if(visible(p))m.addTo(map);loaded++;status.textContent=`${loaded} av ${places.length} steder plassert på kartet. Trykk på markørene for detaljer.`}
-const pending=[];places.forEach(p=>{let c=cache[p[5]];if(c&&c.length===2)pin(p,+c[0],+c[1]);else pending.push(p)});
-async function geocode(){for(const p of pending){try{const u='https://nominatim.openstreetmap.org/search?format=json&limit=1&countrycodes=gb&q='+encodeURIComponent(p[5]);let r=await fetch(u,{headers:{'Accept':'application/json'}});if(!r.ok)throw Error('Lookup failed');let data=await r.json();if(data.length){let lat=+data[0].lat,lon=+data[0].lon;cache[p[5]]=[lat,lon];try{localStorage.setItem(store,JSON.stringify(cache))}catch{}pin(p,lat,lon)}}catch(e){/* Links still work if a place is not found */}await new Promise(resolve=>setTimeout(resolve,1200))}
-status.textContent=`${loaded} av ${places.length} steder funnet. Manglende steder kan åpnes med Google Maps-lenkene.`}
-geocode();document.querySelector('[data-tab="kart"]').addEventListener('click',()=>{setTimeout(()=>map.invalidateSize(),120)});
-})();
-</script>
+function configureParticipantNav(){
+  const participant=isParticipantMode();
+  $('modeSwitch').classList.toggle('hidden',!admin);
+  $('showAdminMode').setAttribute('aria-pressed',String(!participant));
+  $('showParticipantMode').setAttribute('aria-pressed',String(participant));
+  $('admin').classList.toggle('hidden',!admin||participant);
+  $('adminControls').classList.toggle('hidden',!admin||participant);
+  $('participantNav').classList.toggle('hidden',!participant);$('missionFilter').classList.toggle('hidden',!participant);
+  if(participant){
+    setParticipantView(participantView);
+  }else{
+    for(const id of ['missionsPanel','scoresPanel','ownPanel'])$(id).classList.remove('hidden');
+    $('teamChat').classList.toggle('hidden',!myTeam);
+    if(myTeam)requestAnimationFrame(()=>{const log=$('chatMessages');if(chatInitialScroll)log.scrollTop=log.scrollHeight});
+  }
+}
+$('showAdminMode').onclick=()=>{adminMode='admin';configureParticipantNav();window.scrollTo({top:0,behavior:'smooth'})};
+$('showParticipantMode').onclick=()=>{adminMode='participant';configureParticipantNav();window.scrollTo({top:0,behavior:'smooth'})};
+$('participantNav').addEventListener('click',e=>{
+  const btn=e.target.closest('button[data-view]');
+  if(!btn)return;
+  setParticipantView(btn.dataset.view);
+  window.scrollTo({top:0,behavior:'smooth'});
+});
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-<script>
-(() => {
-  'use strict';
-  const SUPABASE_URL = 'https://wvnrmtcaoxzmukeokcwd.supabase.co';
-  const SUPABASE_KEY = 'sb_publishable_KgFFfr6f1eJd1azLxx-1mg_im9MjVnA';
-  const AUTH_URL = SUPABASE_URL + '/functions/v1/newcastle-auth';
-  const bucket = 'newcastle-chat-images';
-  console.info('ALL NEWCASTLE TEST – admin PIN activation – 28.10.2026');
-  const root = document.getElementById('chat');
-  const escChat = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const names = [
-    [1,'Sebastian Nenseth','Maskineriet'],[2,'Benjamin Thuve','Maskineriet'],[3,'Fritz Ryan Domingo','Maskineriet'],[4,'Frode Hegg','Maskineriet'],
-    [5,'Fayez Fadie','Muon'],[6,'Benjamin Johannessen','Muon'],[7,'Filips Grindulis','Muon'],[8,'Marius Horni','Muon'],[9,'Sarkawt Kareemi','Muon'],[10,'Stian Abrahamsen','Muon'],
-    [11,'Kenneth Hårsaker','Saola'],[12,'Nicklas Huse','Saola'],[13,'Børre Syversen','Saola'],
-    [14,'Sondre Thorsen','Allente Norge'],[15,'Christian Sjøsaasen','Allente Norge'],[16,'Petter Sørebø','Allente Norge'],
-    [17,'Mats Hovland','Viaplay'],[18,'Erik Bjerke','Global Connect']
-  ];
-  let client, currentUser = null, myParticipant = null, channel = null, loaded = false, busy = false, chatInitialScroll = true, likesAvailable = true;
-  const imageUrls = new Map();
-  const options = names.map(([id,name,company]) => `<option value="${id}">${escChat(name)} – ${escChat(company)}</option>`).join('');
-  root.innerHTML = `<div class="chat-intro"><h2>💬 ALL NEWCASTLE – felles chat</h2><p>Kun for turens 18 deltakere. Meldinger og bilder deles med gruppen.</p></div>
-    <article class="card" id="chat-auth-card"><h2>Logg inn eller aktiver kontoen</h2>
-      <div class="chat-field"><label for="chat-person">Velg navnet ditt</label><select id="chat-person"><option value="">Velg deltaker …</option>${options}</select></div>
-      <div class="chat-actions"><button type="button" class="chat-btn" id="chat-mode-login">Jeg har personlig PIN</button><button type="button" class="chat-btn secondary" id="chat-mode-activate">Aktiver for første gang</button></div>
-      <form id="chat-login-form"><div class="chat-field"><label for="chat-login-pin">Personlig PIN (6–12 siffer)</label><input id="chat-login-pin" type="password" inputmode="numeric" pattern="[0-9]{6,12}" minlength="6" maxlength="12" autocomplete="off" required></div><button class="chat-btn" type="submit">Logg inn</button></form>
-      <form id="chat-activate-form" hidden><div class="chat-field"><label for="chat-invite">Personlig engangskode (12 tegn)</label><input id="chat-invite" maxlength="12" autocomplete="off" autocapitalize="characters" required></div><div class="chat-field"><label for="chat-first-pin">Felles førstegangs-PIN</label><input id="chat-first-pin" type="password" inputmode="numeric" autocomplete="off" required></div><div class="chat-field"><label for="chat-new-pin">Velg personlig PIN (6–12 siffer)</label><input id="chat-new-pin" type="password" inputmode="numeric" pattern="[0-9]{6,12}" minlength="6" maxlength="12" autocomplete="new-password" required></div><div class="chat-field"><label for="chat-confirm-pin">Gjenta personlig PIN</label><input id="chat-confirm-pin" type="password" inputmode="numeric" pattern="[0-9]{6,12}" minlength="6" maxlength="12" autocomplete="new-password" required></div><p class="chat-invite-note">Engangskoden brukes kun én gang. Kontakt arrangøren hvis du mangler kode eller aktiveringen feiler.</p><button class="chat-btn" type="submit">Aktiver konto</button></form>
-      <form id="chat-admin-enroll-form" hidden><p class="chat-invite-note">For Christian og Petter i TEST: Bekreft din eksisterende Challenge-konto én gang og velg personlig PIN. Passordet endres ikke.</p><div class="chat-field"><label for="chat-admin-email">E-post til eksisterende TEST-konto</label><input id="chat-admin-email" type="email" autocomplete="username" required></div><div class="chat-field"><label for="chat-admin-password">Eksisterende passord</label><input id="chat-admin-password" type="password" autocomplete="current-password" required></div><div class="chat-field"><label for="chat-admin-pin">Velg personlig PIN (6–12 siffer)</label><input id="chat-admin-pin" type="password" inputmode="numeric" pattern="[0-9]{6,12}" minlength="6" maxlength="12" autocomplete="new-password" required></div><div class="chat-field"><label for="chat-admin-confirm">Gjenta personlig PIN</label><input id="chat-admin-confirm" type="password" inputmode="numeric" pattern="[0-9]{6,12}" minlength="6" maxlength="12" autocomplete="new-password" required></div><button class="chat-btn" type="submit">Aktiver personlig TEST-PIN</button></form>
-      <p class="chat-hint">Innloggingen gjelder bare Newcastle-chatten. Reiseprogram og kart er åpne for alle.</p><p id="chat-auth-status" role="status" aria-live="polite"></p></article>
-    <article class="card" id="chat-room" hidden><div class="chat-session"><strong id="chat-who"></strong><button class="chat-btn secondary" id="chat-logout" type="button">Logg ut</button></div><div class="chat-actions" style="margin:0 0 12px"><button class="chat-btn secondary" id="chat-enable-push" type="button">🔔 Aktiver varsler</button><span class="chat-hint" id="chat-push-status" role="status" aria-live="polite">Få beskjed når noen skriver i chatten.</span></div><div id="chat-feed" class="chat-feed" role="log" aria-label="Meldinger i felles chat" aria-live="polite"><span class="chat-loading">Henter meldinger …</span></div>
-      <form class="chat-compose" id="chat-send-form"><label for="chat-text"><strong>Ny melding</strong></label><textarea id="chat-text" maxlength="2000" placeholder="Skriv til gjengen …"></textarea><label class="chat-photo" for="chat-file">📷 Legg ved bilde (JPEG, PNG eller WebP, maks 10 MB)</label><input id="chat-file" type="file" accept="image/jpeg,image/png,image/webp"><div class="chat-actions"><button class="chat-btn" id="chat-send" type="submit">Send melding</button><span class="chat-hint" id="chat-file-name"></span></div><p id="chat-send-status" role="status" aria-live="polite"></p></form></article>`;
-  const $ = id => document.getElementById(id);
-  const status = (id,msg,err=false) => { const el=$(id);el.textContent=msg;el.className=err?'chat-error':'chat-success'; };
-  const selected = () => Number($('chat-person').value);
-  const participant = id => names.find(n=>n[0]===id);
-  const setBusy = flag => {busy=flag;root.querySelectorAll('button[type=submit]').forEach(b=>b.disabled=flag);};
-  const switchMode = activate => { $('chat-login-form').hidden=activate; $('chat-activate-form').hidden=!activate; $('chat-admin-enroll-form').hidden=true;status('chat-auth-status',''); };
-  $('chat-mode-login').onclick=()=>switchMode(false);
-  $('chat-mode-activate').onclick=()=>{ const id=selected(); if(id===15||id===16){$('chat-login-form').hidden=true;$('chat-activate-form').hidden=true;$('chat-admin-enroll-form').hidden=false;status('chat-auth-status','');}else switchMode(true); };
-  $('chat-person').addEventListener('change',()=>{if(!$('chat-admin-enroll-form').hidden && ![15,16].includes(selected()))switchMode(true);});
-  $('chat-file').onchange=()=>{ $('chat-file-name').textContent=$('chat-file').files[0]?.name||''; };
-  document.querySelector('[data-tab=chat]').addEventListener('click',()=>{setTimeout(()=>{const feed=$('chat-feed');if(feed&&feed.dataset.opened!=='yes'){feed.scrollTop=feed.scrollHeight;feed.dataset.opened='yes';}},50);});
-   $('chat-shortcut').addEventListener('click',e=>{e.preventDefault();document.querySelector('[data-tab="chat"]').click();$('chat').scrollIntoView({behavior:'smooth',block:'start'});});
-  if (location.hash === '#chat') document.querySelector('[data-tab="chat"]').click();
-  window.addEventListener('hashchange', () => { if (location.hash === '#chat') document.querySelector('[data-tab="chat"]').click(); });
-  if (!window.supabase?.createClient) {status('chat-auth-status','Kunne ikke laste inn chatbiblioteket. Sjekk internettforbindelsen.',true);return;}
-  client=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
-  const PUSH_URL = SUPABASE_URL + '/functions/v1/newcastle-push';
-  const pushButton = $('chat-enable-push');
-  const pushStatus = $('chat-push-status');
-  const setPushStatus = msg => { pushStatus.textContent = msg; };
-  function vapidBytes(base64url) {
-    const base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
-    const raw = atob(base64.padEnd(Math.ceil(base64.length / 4) * 4, '='));
-    return Uint8Array.from(raw, c => c.charCodeAt(0));
+function applyMissionFilter(){
+  const items=[...document.querySelectorAll('#missions .mission-item')];
+  let visible=0;
+  for(const item of items){
+    const show=missionFilter==='all'||(missionFilter==='available'&&item.dataset.available==='yes')||(missionFilter==='completed'&&item.dataset.completed==='yes');
+    item.classList.toggle('hidden',!show);
+    if(show)visible++;
   }
-  async function pushRequest(payload) {
-    const { data, error } = await client.auth.getSession();
-    if (error || !data.session?.access_token) throw Error('Logg inn i chatten først.');
-    const response = await fetch(PUSH_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY,
-        'Authorization': 'Bearer ' + data.session.access_token
-      },
-      body: JSON.stringify(payload)
+  $('missionFilterSelect').value=missionFilter;
+  $('missionFilterCount').textContent=visible===0&&missionFilter==='available'&&!challengeOpen?'🏁 Konkurransen starter snart! Christian åpner Challenge og oppdragene når alle er klare.':visible===0&&missionFilter==='available'?'Ingen oppdrag er åpne akkurat nå. Følg med – administrator åpner dem etter hvert.':visible+' av '+items.length+' oppgaver vises'+(visible===0?' – ingen oppgaver i denne kategorien.':'.');
+}
+$('missionFilterSelect').addEventListener('change',e=>{missionFilter=e.target.value;applyMissionFilter()});
+async function load(){if(loading)return;loading=true;try{const {data:{user}}=await db.auth.getUser();if(!user){$('challengeGate').classList.add('hidden');$('masterControls').classList.add('hidden');$('login').classList.remove('hidden');$('app').classList.add('hidden');return;}$('login').classList.add('hidden');me=await check(await db.from('newcastle_participants').select('id,full_name').eq('auth_user_id',user.id).single());admin=await rpc('challenge_is_admin');isChristian=admin&&user.id==='3a4b9cd0-e6fd-427c-a733-92a10b01d6ec';challengeOpen=await rpc('challenge_is_open');updateMasterUI();if(!challengeOpen&&!admin){$('app').classList.add('hidden');$('challengeGate').classList.remove('hidden');$('gateStatus').textContent='Sist kontrollert: '+new Date().toLocaleTimeString('nb-NO');return;}$('challengeGate').classList.add('hidden');$('app').classList.remove('hidden');const members=await check(await db.from('challenge_team_members').select('team_id,participant_id'));myTeam=members.find(x=>x.participant_id===me.id)?.team_id||null;teams=await check(await db.from('challenge_teams').select('id,name'));missions=await check(await db.from('challenge_missions').select('id,title,description,max_points,category,is_active,sort_order').order('sort_order'));submissions=await check(await db.from('challenge_submissions').select('id,team_id,mission_id,answer_text,status,points_awarded,admin_comment,submitted_at').order('submitted_at',{ascending:false}));const scoreState=await rpc('challenge_scoreboard_safe');const scores=scoreState.scores||[];const scoreboardLocked=!scoreState.visible;renderChallengeHero(scores,scoreState);$('who').textContent=me.full_name+' · '+(admin?'Administrator':'Deltaker')+(myTeam?' · '+teams.find(t=>t.id===myTeam)?.name:'');$('admin').classList.toggle('hidden',!admin);$('adminControls').classList.toggle('hidden',!admin);await loadChatState();configureParticipantNav();$('scores').innerHTML=scoreboardLocked?'<div class="card"><h3>🔒 Finalen nærmer seg!</h3><p>Christian har skjult poengtavlen for alle lag frem til premieutdelingen. Lykke til! 🏆</p></div>':scores.sort((a,b)=>b.total_points-a.total_points||b.main_points-a.main_points||b.completed_main_missions-a.completed_main_missions).map((s,i)=>`<div class="score ${i<3?'top-three':''} ${teams.find(t=>t.id===myTeam)?.name===s.team_name?'own-team':''}"><span><span class="rank-medal">${['🥇','🥈','🥉'][i]||'🏁'}</span>${i+1}. ${safe(s.team_name)}</span><strong>${s.total_points} poeng</strong></div>`).join('');$('missions').innerHTML=missions.filter(m=>admin||m.id!=='G01'||m.is_active).map(m=>{const mine=submissions.find(s=>s.team_id===myTeam&&s.mission_id===m.id&&s.status!=='rejected');const rejected=submissions.find(s=>s.team_id===myTeam&&s.mission_id===m.id&&s.status==='rejected');const state=mine?.status==='approved'?'approved':mine?'pending':rejected?'rejected':m.is_active?'active':'closed';const label=state==='approved'?`✓ Godkjent${scoreboardLocked&&!admin?' · poeng skjult':' · '+mine.points_awarded+' poeng'}`:state==='pending'?'⏳ Venter på godkjenning':state==='rejected'?(m.is_active?'Avvist – kan prøves igjen':'Avvist · oppgaven er stengt'):(m.is_active?'Tilgjengelig':'🔒 Stengt');const canSubmit=m.is_active&&myTeam&&!mine;return `<div class="card mission-item ${mine?'mission-done':''}" data-mission-code="${safe(m.id)}" data-available="${m.is_active&&!mine?'yes':'no'}" data-completed="${mine?.status==='approved'?'yes':'no'}"><span class="pill">${safe(m.id)} · ${m.max_points} poeng · ${m.is_active?'Aktiv':'Stengt'}</span><span class="state state-${state}">${label}</span><div class="mission-heading"><img class="mission-logo" src="logos/${safe(m.id)}.png" alt="Logo for ${safe(m.title)}" loading="lazy" width="140" height="140"><h3>${safe(m.title)}</h3></div><p>${safe(m.description)}</p>${mine?'<p>🔒 Laget har allerede sendt inn denne oppgaven.</p>':canSubmit?`<form data-mission="${safe(m.id)}"><label>Tekst / svar<textarea name="answer" rows="3" maxlength="4000"></textarea></label><label>Bilder eller videoer (maks 5, 50 MB per fil)<input type="file" name="files" multiple accept="image/jpeg,image/png,image/webp,image/heic,image/heif,video/mp4,video/quicktime,video/webm"></label><button type="submit">📤 Send inn</button></form>`:''}</div>`}).join('');document.querySelectorAll('form[data-mission]').forEach(f=>{
+  f.onsubmit=e=>submit(e,f);
+  const input=f.elements.files;
+  const info=document.createElement('p');
+  info.className='muted';info.setAttribute('role','status');
+  info.textContent='Ingen vedlegg valgt.';
+  input.insertAdjacentElement('afterend',info);
+  input.addEventListener('change',()=>{
+    const files=[...input.files];
+    info.textContent=files.length
+      ? files.map(file=>file.name+' ('+(file.size/1048576).toFixed(1)+' MB)').join(' · ')
+      : 'Ingen vedlegg valgt.';
+  });
+});applyMissionFilter();$('own').innerHTML=submissions.filter(s=>s.team_id===myTeam).map(s=>`<p><b>${safe(s.mission_id)}</b> – ${safe(s.status)} · ${scoreboardLocked&&!admin?'Poeng skjult':s.points_awarded+' poeng'} ${s.admin_comment?'· '+safe(s.admin_comment):''}</p>`).join('')||'Ingen innsendelser.';if(admin){if(isChristian&&!goldenEditorInitialized)await initGoldenEditor();renderAdminDashboard(scores);renderRevealControls(scoreState);renderTeamProgress();$('queue').innerHTML=[...submissions].sort((a,b)=>(a.status==='pending'?0:1)-(b.status==='pending'?0:1)).map(s=>`<div class="card" id="review-${safe(s.id)}"><h3>${safe(teams.find(t=>t.id===s.team_id)?.name)} · ${safe(s.mission_id)}</h3><p>${safe(s.answer_text)}</p><p>Status: <b>${safe(s.status)}</b></p><div id="files-${s.id}"></div><label>Vurdering<select id="percent-${s.id}" data-max="${missions.find(m=>m.id===s.mission_id)?.max_points||0}"><option value="100">100 % – Fullført</option><option value="75">75 % – Nesten fullført</option><option value="50">50 % – Delvis utført</option><option value="0">0 % – Avvist</option></select></label><p id="calculated-${s.id}"></p><label>Kommentar<input id="comment-${s.id}" value="${safe(s.admin_comment||'')}"></label><button data-review="${s.id}">${s.status==='pending'?'Lagre vurdering':'Oppdater vurdering'}</button></div>`).join('')||'Ingen innsendelser.';document.querySelectorAll('[data-review]').forEach(b=>b.onclick=()=>review(b));document.querySelectorAll('select[id^="percent-"]').forEach(sel=>{const submission=submissions.find(s=>String(s.id)===sel.id.slice(8));const max=Number(sel.dataset.max);const options=[100,75,50];if(submission?.status==='rejected')sel.value='0';else if(submission?.status==='approved'){sel.value=String(options.reduce((best,p)=>Math.abs(Math.round(max*p/100)-submission.points_awarded)<Math.abs(Math.round(max*best/100)-submission.points_awarded)?p:best,100))}const update=()=>{$('calculated-'+sel.id.slice(8)).textContent=sel.value==='0'?'Avvist · 0 poeng':'Tildeles '+Math.round(max*Number(sel.value)/100)+' av '+max+' poeng'};sel.onchange=update;update()});const files=await check(await db.from('challenge_submission_files').select('submission_id,storage_path,file_name'));for(const f of files){const slot=$('files-'+f.submission_id);if(!slot)continue;const btn=document.createElement('button');btn.textContent='📎 '+f.file_name;btn.onclick=async()=>{try{const result=await check(await db.storage.from('challenge-media').createSignedUrl(f.storage_path,120));window.open(result.signedUrl,'_blank','noopener')}catch(e){tell(e.message,true)}};slot.append(btn)}}}catch(e){$('app').classList.add('hidden');tell('Kunne ikke laste: '+e.message,true);$('challengeGate').classList.remove('hidden');$('gateStatus').textContent='Kunne ikke kontrollere tilgangen: '+e.message;}finally{loading=false}}
+let goldenEditorInitialized=false;
+async function initGoldenEditor(){
+ if(!isChristian)return;
+ $('goldenEditor').classList.remove('hidden');
+ try{
+  const draft=await rpc('challenge_golden_get_draft');
+  if(draft){$('goldenTitle').value=draft.title||'';$('goldenDescription').value=draft.description||'';$('goldenPoints').value=draft.max_points||30;}
+  goldenEditorInitialized=true;updateGoldenStatus();
+ }catch(e){$('goldenStatus').textContent='Kunne ikke hente utkast: '+e.message}
+}
+function updateGoldenStatus(){
+ const m=missions.find(x=>x.id==='G01');
+ $('goldenStatus').textContent=m?.is_active?'🟢 Golden Mission er publisert og åpen. Utkastendringer publiseres ikke automatisk.':'🔒 Golden Mission er stengt. Utkastet er privat.';
+}
+function goldenFormValues(){
+ const title=$('goldenTitle').value.trim(),description=$('goldenDescription').value.trim(),points=Number($('goldenPoints').value);
+ if(!title||!description)throw Error('Fyll inn navn og beskrivelse.');
+ if(!Number.isInteger(points)||points<1||points>1000)throw Error('Poeng må være et heltall mellom 1 og 1000.');
+ return {p_title:title,p_description:description,p_max_points:points};
+}
+async function goldenAction(action){
+ if(!isChristian)return;
+ const buttons=['goldenSave','goldenPublish','goldenClose'].map($);
+ try{
+  if(action==='publish'&&!confirm('Publisere Golden Mission for ALLE lag nå?'))return;
+  if(action==='close'&&!confirm('Stenge Golden Mission for nye innsendelser?'))return;
+  const values=action==='close'?null:goldenFormValues();
+  buttons.forEach(b=>b.disabled=true);$('goldenStatus').textContent='Lagrer …';
+  if(action==='save')await rpc('challenge_golden_save_draft',values);
+  if(action==='publish')await rpc('challenge_golden_publish',values);
+  if(action==='close')await rpc('challenge_golden_close');
+  $('goldenStatus').textContent=action==='save'?'💾 Privat utkast lagret.':action==='publish'?'🌟 Golden Mission publisert!':'🔒 Golden Mission stengt.';
+  if(action!=='save')await load();
+ }catch(e){$('goldenStatus').textContent='Feil: '+e.message}
+ finally{buttons.forEach(b=>b.disabled=false)}
+}
+$('goldenSave').onclick=()=>goldenAction('save');
+$('goldenPublish').onclick=()=>goldenAction('publish');
+$('goldenClose').onclick=()=>goldenAction('close');
+function renderChallengeHero(scores,scoreState){
+ const root=$('challengeHero');
+ if(!me){root.classList.add('hidden');return;}
+ root.classList.remove('hidden');
+ const team=teams.find(t=>t.id===myTeam);
+ const ordered=[...scores].sort((a,b)=>(Number(b.total_points)||0)-(Number(a.total_points)||0)||(Number(b.main_points)||0)-(Number(a.main_points)||0)||(Number(b.completed_main_missions)||0)-(Number(a.completed_main_missions)||0));
+ const rank=team?ordered.findIndex(s=>s.team_name===team.name):-1;
+ const own=rank>=0?ordered[rank]:null;
+ const completed=missions.filter(m=>submissions.some(s=>s.team_id===myTeam&&s.mission_id===m.id&&s.status==='approved')).length;
+ $('heroTitle').textContent='Hei, '+me.full_name.split(' ')[0]+'!';
+ $('heroTeam').textContent=team?'Du konkurrerer for '+team.name:admin?'Administrator · oversikt over konkurransen':'Du er ikke registrert på et lag';
+ // Skjul testresultater i deltakerforsiden frem til Christian starter Challenge.
+ // Reelle testdata beholdes i databasen og i administratoroversikten.
+ $('heroRank').textContent=scoreState.visible&&challengeOpen&&rank>=0?(rank+1)+'.':'🔒';
+ $('heroPoints').textContent=scoreState.visible&&challengeOpen&&own?String(own.total_points||0):'🔒';
+ $('heroDone').textContent=challengeOpen?completed+'/'+missions.length:'–/'+missions.length;
+ $('heroProgressFill').style.width=challengeOpen&&missions.length?Math.min(100,completed/missions.length*100)+'%':'0%';
+ $('heroTitle').textContent=challengeOpen?'Hei, '+me.full_name.split(' ')[0]+'!':'🏁 Konkurransen starter snart!';
+ $('heroFoot').textContent=!scoreState.visible?'🔒 Christian har skjult resultatene frem til premieutdelingen.':challengeOpen?'🟢 Challenge er i gang · Lykke til!':'🟡 Christian starter konkurransen når alle lag er klare. Testresultater vises fortsatt i administratoroversikten.';
+}
+function renderRevealControls(state){
+  $('revealControls').classList.toggle('hidden',!admin);
+  $('revealButtons').classList.toggle('hidden',!isChristian);
+  $('revealStatus').textContent=state.reason==='revealed'?'🟢 Poengtavlen er synlig for alle lag.':'🔒 Poengtavlen er skjult for alle lag (administratorer ser den fortsatt).';
+  $('revealOpen').disabled=state.reason==='revealed';
+  $('revealClose').disabled=state.reason!=='revealed';
+}
+async function changeReveal(reveal){
+  if(!isChristian)return;
+  if(!window.confirm(reveal?'Vise poengtavlen for ALLE lag nå?':'Skjule poengtavlen for ALLE lag nå?'))return;
+  $('revealOpen').disabled=true;$('revealClose').disabled=true;
+  try{await rpc('challenge_scoreboard_reveal',{p_reveal:reveal});tell(reveal?'🟢 Poengtavlen vises for alle lag.':'🔒 Poengtavlen er skjult for alle lag.');await load()}
+  catch(e){tell('Kunne ikke endre resultatvisning: '+e.message,true);await load()}
+}
+$('revealOpen').onclick=()=>changeReveal(true);
+$('revealClose').onclick=()=>changeReveal(false);
+function renderTeamProgress(){
+  const root=$('progressContent');
+  const filter=$('progressFilter').value;
+  const ordered=[...missions].sort((a,b)=>(Number(a.sort_order)||0)-(Number(b.sort_order)||0));
+  const rows=teams.map(team=>{
+    const states=ordered.map(m=>{
+      const relevant=submissions.filter(s=>s.team_id===team.id&&s.mission_id===m.id);
+      const selected=relevant.find(s=>s.status==='approved')||relevant.find(s=>s.status==='pending')||relevant.find(s=>s.status==='rejected');
+      return {mission:m,submission:selected,status:selected?.status||'missing'};
     });
-    let result = {};
-    try { result = await response.json(); } catch {}
-    if (!response.ok) throw Error(result.error || 'Varslingstjenesten svarte med feil ' + response.status);
-    return result;
+    const counts={approved:0,pending:0,rejected:0,missing:0};
+    for(const r of states)counts[r.status]=(counts[r.status]||0)+1;
+    const shown=states.filter(r=>filter==='all'||r.status===filter);
+    const html=shown.map(({mission:m,submission:sub,status})=>{
+      const label={approved:'✓ Godkjent',pending:'⏳ Til vurdering',rejected:'✕ Avvist',missing:'– Ikke levert'}[status]||status;
+      const points=status==='approved'?` · ${Number(sub.points_awarded)||0} p`:'';
+      const action=status==='pending'?`<button type="button" class="progress-link" data-progress-review="${safe(sub.id)}">Vurder</button>`:'';
+      return `<div class="progress-row"><span class="progress-title"><b>${safe(m.id)}</b> · ${safe(m.title)} ${m.id==='G01'?'🌟':''}</span><span class="progress-status ${status}">${label}${points} ${action}</span></div>`;
+    }).join('')||'<p class="muted">Ingen oppgaver med valgt filter.</p>';
+    return `<details class="progress-team" ${counts.pending?'open':''}><summary>${safe(team.name)} · ${counts.approved} godkjent · ${counts.pending} venter · ${counts.rejected} avvist · ${counts.missing} ikke levert</summary><div class="progress-rows">${html}</div></details>`;
+  }).join('');
+  root.innerHTML=rows||'<p>Ingen lag funnet.</p>';
+  root.querySelectorAll('[data-progress-review]').forEach(btn=>btn.onclick=()=>{
+    const target=$('review-'+btn.dataset.progressReview);
+    if(!target){tell('Fant ikke vurderingen. Oppdater oversikten.',true);return;}
+    target.scrollIntoView({behavior:'smooth',block:'center'});
+    target.classList.add('progress-highlight');
+    setTimeout(()=>target.classList.remove('progress-highlight'),3500);
+  });
+}
+function renderAdminDashboard(scores){
+  const statuses={pending:0,approved:0,rejected:0};
+  for(const s of submissions)if(Object.hasOwn(statuses,s.status))statuses[s.status]++;
+  const active=missions.filter(m=>m.is_active).length;
+  const maxScore=Math.max(1,...scores.map(s=>Number(s.total_points)||0));
+  const sorted=[...scores].sort((a,b)=>(Number(b.total_points)||0)-(Number(a.total_points)||0));
+  const stat=(label,value)=>`<div class="dash-stat"><strong>${value}</strong><span>${label}</span></div>`;
+  const teamRows=sorted.map((s,i)=>{
+    const team=teams.find(t=>t.name===s.team_name);
+    const own=team?submissions.filter(x=>x.team_id===team.id):[];
+    const approved=own.filter(x=>x.status==='approved').length;
+    const waiting=own.filter(x=>x.status==='pending').length;
+    const pts=Number(s.total_points)||0;
+    return `<div class="dash-team"><div class="dash-team-head"><strong>${i+1}. ${safe(s.team_name)}</strong><strong>${pts} poeng</strong></div><small>${approved} godkjent · ${waiting} til vurdering</small><div class="dash-progress"><div style="width:${Math.max(0,Math.min(100,pts/maxScore*100))}%"></div></div></div>`;
+  }).join('')||'<p>Ingen lag registrert.</p>';
+  const pending=submissions.filter(s=>s.status==='pending');
+  const pendingText=pending.length?pending.slice(0,6).map(s=>{
+    const team=teams.find(t=>t.id===s.team_id);
+    const mission=missions.find(m=>m.id===s.mission_id);
+    return `<div class="score"><span>${safe(team?.name||s.team_id)} · ${safe(mission?.title||s.mission_id)}</span><span>⏳ Venter</span></div>`;
+  }).join(''):'<p class="ok">Ingen innsendelser venter på godkjenning.</p>';
+  const missionControls=missions.map(m=>`<div class="mission-control"><div class="mission-control-info"><img class="mission-control-logo" src="logos/${safe(m.id)}.png" alt="" loading="lazy" width="80" height="80"><div><strong>${safe(m.id)} · ${safe(m.title)}</strong><div class="muted"><span class="mission-control-status ${m.is_active?'':'closed'}">${m.is_active?'● Åpen':'● Stengt'}</span> · ${Number(m.max_points)} poeng</div></div></div>${m.id==='G01'?'<span class="muted">🌟 Styres i Golden Mission-panelet</span>':`<button type="button" data-toggle-mission="${safe(m.id)}" data-new-active="${m.is_active?'false':'true'}">${m.is_active?'🔒 Steng oppgave':'🔓 Åpne oppgave'}</button>`}</div>`).join('');
+  $('adminDashboard').innerHTML=`<div class="dash-grid">${stat('Venter på vurdering',statuses.pending)}${stat('Godkjente innsendelser',statuses.approved)}${stat('Avviste innsendelser',statuses.rejected)}${stat('Aktive oppgaver',active+' / '+missions.length)}</div><div class="dash-actions"><button type="button" id="dashGoQueue">📨 Gå til godkjenning</button><button type="button" id="dashRefresh">🔄 Oppdater oversikt</button></div><h3 class="dash-subtitle">🏆 Lagoversikt</h3>${teamRows}<h3 class="dash-subtitle">🎯 Åpne og steng oppgaver</h3><p class="muted">Endringene gjelder alle lag umiddelbart. Allerede innsendte oppgaver beholdes.</p><div class="dash-actions"><button type="button" id="dashOpenAll" ${missions.filter(m=>m.id!=='G01').every(m=>m.is_active)?'disabled':''}>🔓 Åpne alle ordinære</button><button type="button" id="dashCloseAll" ${missions.filter(m=>m.id!=='G01').every(m=>!m.is_active)?'disabled':''}>🔒 Steng alle ordinære</button></div><p class="muted">Gjelder kun de 16 ordinære oppgavene. 🌟 Golden Mission (G01) styres separat nedenfor.</p>${missionControls}<h3 class="dash-subtitle">📨 Venter på Christian (${pending.length})</h3>${pendingText}${pending.length>6?`<p class="muted">Viser 6 av ${pending.length}. Se resten under godkjenning.</p>`:''}`;
+  $('dashGoQueue').onclick=()=>document.getElementById('queue').scrollIntoView({behavior:'smooth',block:'start'});
+  $('adminDashboard').querySelectorAll('[data-toggle-mission]').forEach(button=>{
+    button.onclick=async()=>{
+      if(!admin)return;
+      const id=button.dataset.toggleMission;
+      const next=button.dataset.newActive==='true';
+      const mission=missions.find(m=>m.id===id);
+      if(!mission)return;
+      if(!window.confirm(`${next?'Åpne':'Stenge'} oppgaven «${mission.title}» for alle lag?`))return;
+      button.disabled=true;
+      try{
+        await rpc('challenge_set_mission_active',{p_mission_id:id,p_is_active:next});
+        tell(`Oppgaven ${id} er ${next?'åpnet':'stengt'}.`);
+        await load();
+      }catch(e){tell('Kunne ikke endre oppgaven: '+e.message,true);button.disabled=false;}
+    };
+  });
+  for (const [buttonId, next] of [['dashOpenAll',true],['dashCloseAll',false]]) {
+    const button=$(buttonId);
+    button.onclick=async()=>{
+      if(!admin)return;
+      const count=missions.filter(m=>m.id!=='G01').length;
+      if(!window.confirm(`${next?'Åpne':'Stenge'} alle ${count} ordinære oppgaver? Golden Mission (G01) endres ikke.`))return;
+      $('dashOpenAll').disabled=true;
+      $('dashCloseAll').disabled=true;
+      try{
+        const changed=await rpc('challenge_set_all_missions_active',{p_is_active:next});
+        tell(`${changed} ordinære oppgaver er ${next?'åpnet':'stengt'}. Golden Mission er uendret.`);
+        await load();
+      }catch(e){tell('Kunne ikke endre alle oppgavene: '+e.message,true);await load();}
+    };
   }
-  async function refreshPushStatus() {
-    if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window)) {
-      pushButton.disabled = true;
-      setPushStatus('Pushvarsler støttes ikke her. På iPhone må appen legges til på Hjem-skjermen.');
-      return;
-    }
-    if (Notification.permission === 'denied') {
-      pushButton.disabled = true;
-      setPushStatus('Varsler er blokkert. Tillat varsler i telefonens innstillinger.');
-      return;
-    }
-    try {
-      const reg = await navigator.serviceWorker.getRegistration('./');
-      const sub = reg && await reg.pushManager.getSubscription();
-      if (sub) {
-        pushButton.textContent = '🔔 Oppdater varsler';
-        setPushStatus('Varsler er aktivert på denne enheten. Trykk for å oppdatere registreringen.');
-      } else {
-        pushButton.textContent = '🔔 Aktiver varsler';
-        setPushStatus('Få beskjed når noen skriver i chatten.');
-      }
-    } catch { setPushStatus('Trykk for å aktivere varsler.'); }
+  $('dashRefresh').onclick=load;
+}
+async function loadChatState(){
+  // Faktisk tilgang krever både at Challenge og lagchat er åpne.
+  const [effective, configured]=await Promise.all([
+    rpc('challenge_chat_is_open'),
+    rpc('challenge_chat_configured_open')
+  ]);
+  chatOpen=effective===true;
+  chatConfiguredOpen=configured===true;
+  $('teamChat').classList.toggle('hidden',isParticipantMode()?participantView!=='teamChat':!myTeam);
+  $('chatContent').classList.toggle('hidden',!chatOpen||!myTeam);
+  $('chatInfo').textContent=!myTeam?'Du er ikke registrert på et lag.':chatOpen?'Åpen for '+(teams.find(t=>t.id===myTeam)?.name||'laget ditt')+'. Bare lagmedlemmer har tilgang.':!challengeOpen&&chatConfiguredOpen?'Lagchatten er klargjort. Venter på at Christian starter Challenge.':'Lagchattene er stengt eller Challenge er ikke startet.';
+  if(admin){
+    $('adminChatState').textContent=chatConfiguredOpen
+      ? (challengeOpen?'🟢 Lagchattene er ÅPNE og tilgjengelige.':'🟡 Lagchattene er åpnet – venter på at Christian starter Challenge.')
+      : (challengeOpen?'🔒 Lagchattene er STENGT. Du kan åpne dem når som helst.':'🔒 Lagchattene er STENGT. Challenge er heller ikke startet.');
+    $('chatOpenBtn').disabled=chatConfiguredOpen;
+    $('chatCloseBtn').disabled=!chatConfiguredOpen;
   }
-  pushButton.onclick = async () => {
-    pushButton.disabled = true;
-    setPushStatus('Aktiverer varsler …');
-    try {
-      if (!window.isSecureContext) throw Error('Varsler krever HTTPS.');
-      if (!('serviceWorker' in navigator) || !('PushManager' in window) || !('Notification' in window))
-        throw Error('Denne nettleseren støtter ikke pushvarsler. På iPhone må appen åpnes fra Hjem-skjermen.');
-      // Permission must be requested directly from this user click.
-      const permission = await Notification.requestPermission();
-      if (permission !== 'granted') throw Error('Varsler ble ikke tillatt. Endre dette i telefonens innstillinger.');
-      const reg = await navigator.serviceWorker.register('./sw.js', { scope: './' });
-      const { publicKey } = await pushRequest({ action: 'public-key' });
-      if (typeof publicKey !== 'string' || !publicKey) throw Error('Mangler offentlig varslingsnøkkel.');
-      let sub = await reg.pushManager.getSubscription();
-      if (!sub) sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: vapidBytes(publicKey) });
-      await pushRequest({ action: 'subscribe', subscription: sub.toJSON() });
-      pushButton.textContent = '🔔 Oppdater varsler';
-      setPushStatus('Varsler er registrert på denne telefonen! Automatisk utsending aktiveres senere.');
-    } catch (err) {
-      setPushStatus('Kunne ikke aktivere varsler: ' + (err.message || 'ukjent feil'));
-    } finally { pushButton.disabled = false; }
-  };
-  async function authRequest(payload) {
-    const r=await fetch(AUTH_URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+SUPABASE_KEY},body:JSON.stringify(payload)});
-    let body={};try{body=await r.json();}catch{}
-    if(!r.ok)throw Error(body.error||'Innlogging feilet ('+r.status+').');
-    return body;
-  }
-  async function finishLogin(result) {
-    if(!result.session?.access_token||!result.session?.refresh_token)throw Error('Innloggingen ga ingen gyldig sesjon.');
-    const {data,error}=await client.auth.setSession({access_token:result.session.access_token,refresh_token:result.session.refresh_token});
-    if(error||!data.user)throw Error(error?.message||'Kunne ikke lagre innloggingen.');
-    await showRoom(data.user);
-  }
-  $('chat-login-form').onsubmit=async e=>{
-    e.preventDefault();if(busy)return;const id=selected();if(!participant(id)){status('chat-auth-status','Velg navnet ditt først.',true);return;}
-    setBusy(true);status('chat-auth-status','Logger inn …');
-    try{const result=await authRequest({action:'login',participant_id:id,pin:$('chat-login-pin').value});await finishLogin(result);$('chat-login-pin').value='';}
-    catch(err){status('chat-auth-status',err.message||'Innlogging feilet.',true);}finally{setBusy(false);}
-  };
-  $('chat-activate-form').onsubmit=async e=>{
-    e.preventDefault();if(busy)return;const id=selected();if(!participant(id)){status('chat-auth-status','Velg navnet ditt først.',true);return;}
-    const newPin=$('chat-new-pin').value;
-    if(newPin!==$('chat-confirm-pin').value){status('chat-auth-status','De personlige PIN-kodene er ikke like.',true);return;}
-    if(!/^\d{6,12}$/.test(newPin)){status('chat-auth-status','Personlig PIN må være 6–12 siffer.',true);return;}
-    setBusy(true);status('chat-auth-status','Aktiverer kontoen …');
-    try{const result=await authRequest({action:'activate',participant_id:id,invite:$('chat-invite').value.trim().toUpperCase(),pin:$('chat-first-pin').value,new_pin:newPin});await finishLogin(result);['chat-invite','chat-first-pin','chat-new-pin','chat-confirm-pin'].forEach(id=>$(id).value='');}
-    catch(err){status('chat-auth-status',err.message||'Aktivering feilet. Ikke prøv gjentatte ganger; kontakt arrangøren.',true);}finally{setBusy(false);}
-  };
-  $('chat-admin-enroll-form').onsubmit=async e=>{
-    e.preventDefault();if(busy)return;
-    const id=selected();if(id!==15&&id!==16){status('chat-auth-status','Velg Petter eller Christian.',true);return;}
-    const pin=$('chat-admin-pin').value;
-    if(pin!==$('chat-admin-confirm').value){status('chat-auth-status','PIN-kodene er ikke like.',true);return;}
-    if(!/^\d{6,12}$/.test(pin)){status('chat-auth-status','PIN må være 6–12 siffer.',true);return;}
-    setBusy(true);status('chat-auth-status','Bekrefter eksisterende konto …');
-    try{
-      const email=$('chat-admin-email').value.trim();
-      const password=$('chat-admin-password').value;
-      const {data:login,error:loginError}=await client.auth.signInWithPassword({email,password});
-      $('chat-admin-password').value='';
-      if(loginError||!login.session)throw Error(loginError?.message||'Kunne ikke bekrefte kontoen.');
-      const r=await fetch(AUTH_URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_KEY,'Authorization':'Bearer '+login.session.access_token},body:JSON.stringify({action:'enroll_existing',participant_id:id,new_pin:pin})});
-      const result=await r.json().catch(()=>({}));
-      if(!r.ok)throw Error(result.error||'Kunne ikke aktivere PIN.');
-      $('chat-admin-pin').value='';$('chat-admin-confirm').value='';
-      await showRoom(login.user);
-      status('chat-send-status','Personlig TEST-PIN er aktivert. Neste gang kan du logge inn med PIN.');
-    }catch(err){status('chat-auth-status',err.message||'Aktivering feilet.',true);}
-    finally{setBusy(false);}
-  };
-  $('chat-logout').onclick=async()=>{await client.auth.signOut();await showLoggedOut();};
-  async function showLoggedOut(){if(channel){await client.removeChannel(channel);channel=null;}currentUser=null;myParticipant=null;loaded=false;chatInitialScroll=true;imageUrls.clear();$('chat-room').hidden=true;$('chat-auth-card').hidden=false;$('chat-feed').replaceChildren();}
-  async function showRoom(user){
-    currentUser=user;
-    const {data:me,error}=await client.from('newcastle_participants').select('id,full_name,company').eq('auth_user_id',user.id).maybeSingle();
-    if(error||!me){await client.auth.signOut();await showLoggedOut();throw Error('Denne kontoen er ikke koblet til en Newcastle-deltaker. Kontakt arrangøren.');}
-    myParticipant=me;chatInitialScroll=true;$('chat-who').textContent='Innlogget: '+me.full_name;$('chat-auth-card').hidden=true;$('chat-room').hidden=false;
-    refreshPushStatus();
-    await loadMessages();
-    if(channel)await client.removeChannel(channel);
-    channel=client.channel('newcastle-chat-test').on('postgres_changes',{event:'INSERT',schema:'public',table:'newcastle_messages'},()=>loadMessages()).subscribe();
-  }
-  async function loadMessages(){
-    if(!currentUser||loaded)return;loaded=true;
-    try{
-      const {data,error}=await client.from('newcastle_messages').select('id,participant_id,body,image_path,created_at').order('created_at',{ascending:false}).limit(150);
-      if(error)throw error;
-      const messages=(data||[]).reverse();const feed=$('chat-feed');const nearBottom=chatInitialScroll||feed.scrollHeight-feed.scrollTop-feed.clientHeight<110;
-       const likesByMessage=new Map(), myLiked=new Set();
-       if(likesAvailable && messages.length){
-         const ids=messages.map(m=>m.id);
-         const {data:likes,error:likesError}=await client.from('newcastle_message_likes').select('message_id,user_id').in('message_id',ids);
-         if(likesError){likesAvailable=false;console.error('Kunne ikke hente likes:',likesError);status('chat-send-status','Kunne ikke hente likes: '+likesError.message,true);}
-         else for(const like of likes||[]){const k=String(like.message_id);likesByMessage.set(k,(likesByMessage.get(k)||0)+1);if(like.user_id===currentUser.id)myLiked.add(k);}
-       }
-      feed.replaceChildren();
-      if(!messages.length){const hint=document.createElement('p');hint.className='chat-loading';hint.textContent='Ingen meldinger ennå. Bli den første som skriver!';feed.appendChild(hint);}
-      for(const m of messages){
-        const p=participant(m.participant_id),box=document.createElement('div');box.className='chat-message'+(myParticipant?.id===m.participant_id?' mine':'');
-        const header=document.createElement('div');const who=document.createElement('span');who.className='by';who.textContent=p?.[1]||'Deltaker';const when=document.createElement('span');when.className='when';when.textContent=new Date(m.created_at).toLocaleString('nb-NO',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'});header.append(who,when);box.appendChild(header);
-        if(m.body){const text=document.createElement('p');text.textContent=m.body;box.appendChild(text);}
-        if(m.image_path){const a=document.createElement('a');a.target='_blank';a.rel='noopener noreferrer';const img=document.createElement('img');img.alt='Bilde delt av '+(p?.[1]||'deltaker');img.loading='lazy';a.appendChild(img);box.appendChild(a);
-          const cached=imageUrls.get(m.image_path);if(cached&&cached.expires>Date.now()){img.src=cached.url;a.href=cached.url;}else{
-            client.storage.from(bucket).createSignedUrl(m.image_path,3600).then(({data,error})=>{if(!error&&data?.signedUrl){imageUrls.set(m.image_path,{url:data.signedUrl,expires:Date.now()+3500000});img.src=data.signedUrl;a.href=data.signedUrl;}else{a.textContent='Bildet kunne ikke lastes';}});
-          }
+  if(chatOpen&&myTeam)await loadChatMessages();else {chatInitialScroll=true;revokeChatMedia();$('chatMessages').replaceChildren();$('chatFiles').value='';$('chatFileList').textContent='';}
+}
+ async function loadChatMessages(){
+  if(chatRefreshBusy||!chatOpen||!myTeam)return;
+  chatRefreshBusy=true;
+  try{
+    const messages=await check(await db.from('challenge_team_chat_messages').select('id,participant_id,message_text,created_at').eq('team_id',myTeam).order('created_at',{ascending:false}).limit(100));
+    const names=new Map(),memberIds=[...new Set((messages||[]).map(m=>m.participant_id))];
+    if(memberIds.length){const people=await check(await db.from('newcastle_participants').select('id,full_name').in('id',memberIds));for(const person of people||[])names.set(person.id,person.full_name)}
+    const ids=(messages||[]).map(m=>m.id);let attachments=[],likes=[];
+    if(ids.length)likes=await check(await db.from('challenge_team_chat_likes').select('message_id,participant_id').in('message_id',ids));
+    const likeCounts=new Map(),myLikes=new Set();
+    for(const like of likes||[]){const id=String(like.message_id);likeCounts.set(id,(likeCounts.get(id)||0)+1);if(like.participant_id===me.id)myLikes.add(id)}
+    if(ids.length)attachments=await check(await db.from('challenge_team_chat_attachments').select('id,message_id,storage_path,file_name,mime_type').in('message_id',ids));
+    const byMessage=new Map();for(const f of attachments||[]){if(!byMessage.has(String(f.message_id)))byMessage.set(String(f.message_id),[]);byMessage.get(String(f.message_id)).push(f)}
+    const log=$('chatMessages'),previousScrollTop=log.scrollTop,wasNearBottom=chatInitialScroll||chatForceBottom||log.scrollHeight-log.scrollTop-log.clientHeight<80;
+    revokeChatMedia();log.replaceChildren();
+    if(!messages.length)log.innerHTML='<p class="muted">Ingen meldinger ennå. Start samtalen!</p>';
+    for(const m of [...messages].reverse()){
+      const div=document.createElement('div');div.className='chat-msg';
+      const small=document.createElement('small');small.textContent=(names.get(m.participant_id)||'Lagmedlem')+' · '+new Date(m.created_at).toLocaleString('nb-NO');div.append(small);
+      if(m.message_text){const content=document.createElement('div');content.textContent=m.message_text;content.style.whiteSpace='pre-wrap';div.append(content)}
+      const files=byMessage.get(String(m.id))||[];
+      if(files.length){const gallery=document.createElement('div');gallery.className='chat-attachments';div.append(gallery);
+        for(const f of files){const holder=document.createElement('div');const label=document.createElement('div');label.className='chat-file-list';label.textContent=f.file_name;holder.append(label);gallery.append(holder);
+          try{
+            // Authenticated download checks storage RLS each time; never create a signed public URL.
+            const blob=await check(await db.storage.from(CHAT_BUCKET).download(f.storage_path));
+            const objectUrl=URL_OBJ.createObjectURL(blob);chatMediaUrls.push(objectUrl);
+            const isVideo=f.mime_type.startsWith('video/');const media=document.createElement(isVideo?'video':'img');media.src=objectUrl;
+            if(isVideo){media.controls=true;media.preload='metadata'}else{media.alt=f.file_name;media.loading='lazy'}
+            holder.append(media);const a=document.createElement('a');a.href=objectUrl;a.download=f.file_name;a.textContent='Last ned';holder.append(document.createTextNode(' '),a);
+          }catch(e){const note=document.createElement('small');note.textContent='Kunne ikke hente vedlegg: '+e.message;holder.append(note)}
         }
-        const likeButton=document.createElement('button');
-        likeButton.type='button';
-        likeButton.className='chat-like'+(myLiked.has(String(m.id))?' liked':'');
-        likeButton.textContent='👍 '+(likesByMessage.get(String(m.id))||0);
-        likeButton.setAttribute('aria-pressed',String(myLiked.has(String(m.id))));
-        likeButton.disabled=!likesAvailable;
-        likeButton.title=likesAvailable?'Lik eller fjern likerklikk':'Likes er ikke aktivert i TEST-databasen ennå';
-        likeButton.onclick=async()=>{
-          if(!myParticipant||!currentUser||likeButton.disabled)return;
-          const userId=currentUser.id;
-          const liked=myLiked.has(String(m.id));
-          const previousCount=likesByMessage.get(String(m.id))||0;
-          likeButton.disabled=true;
-          // Show the change immediately; restore it if the database rejects the request.
-          likeButton.textContent='👍 '+Math.max(0,previousCount+(liked?-1:1));
-          likeButton.classList.toggle('liked',!liked);
-          likeButton.setAttribute('aria-pressed',String(!liked));
-          status('chat-send-status','Oppdaterer likerklikk …');
-          try {
-            const request=liked
-              ? client.from('newcastle_message_likes').delete().eq('message_id',m.id).eq('user_id',userId)
-              : client.from('newcastle_message_likes').insert({message_id:m.id,user_id:userId});
-            const {error:likeError}=await request;
-            if(likeError)throw likeError;
-            status('chat-send-status','Likerklikk oppdatert!');
-            await loadMessages();
-          } catch(err) {
-            console.error('Kunne ikke oppdatere like:',err);
-            likeButton.textContent='👍 '+previousCount;
-            likeButton.classList.toggle('liked',liked);
-            likeButton.setAttribute('aria-pressed',String(liked));
-            status('chat-send-status','Kunne ikke oppdatere like: '+(err?.message||'Ukjent feil'),true);
-          } finally {
-            likeButton.disabled=false;
+      }
+      const likeButton=document.createElement('button');likeButton.type='button';
+      likeButton.className='chat-like'+(myLikes.has(String(m.id))?' liked':'');
+      likeButton.setAttribute('aria-pressed',String(myLikes.has(String(m.id))));
+      likeButton.textContent='👍 '+(likeCounts.get(String(m.id))||0);
+      likeButton.title=myLikes.has(String(m.id))?'Fjern din tommel opp':'Gi tommel opp';
+      likeButton.onclick=async()=>{
+        if(!chatOpen||!myTeam||likeButton.disabled)return;
+        likeButton.disabled=true;
+        const oldScroll=log.scrollTop,nearBottom=log.scrollHeight-log.scrollTop-log.clientHeight<80;
+        try{
+          if(myLikes.has(String(m.id))){
+            await check(await db.from('challenge_team_chat_likes').delete().eq('message_id',m.id).eq('participant_id',me.id));
+          }else{
+            await check(await db.from('challenge_team_chat_likes').insert({message_id:m.id,participant_id:me.id}));
           }
-        };
-        box.appendChild(likeButton);
-        feed.appendChild(box);
-      }
-      if(nearBottom)feed.scrollTop=feed.scrollHeight;
-    }catch(err){$('chat-feed').textContent='Kunne ikke hente meldinger: '+(err.message||'ukjent feil')+'. Kontroller at SQL-oppsettet er kjørt.';}
-    finally{loaded=false;}
-  }
-  $('chat-send-form').onsubmit=async e=>{
-    e.preventDefault();if(busy||!myParticipant)return;
-    const body=$('chat-text').value.trim(),file=$('chat-file').files[0];if(!body&&!file){status('chat-send-status','Skriv en melding eller velg et bilde.',true);return;}
-    if(body.length>2000){status('chat-send-status','Maks 2000 tegn.',true);return;}
-    if(file&&(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>10*1024*1024)){status('chat-send-status','Velg JPEG, PNG eller WebP under 10 MB.',true);return;}
-    setBusy(true);status('chat-send-status','Sender …');let path=null;
-    try{
-      if(file){const ext=({'image/jpeg':'jpg','image/png':'png','image/webp':'webp'})[file.type];path=currentUser.id+'/'+crypto.randomUUID()+'.'+ext;
-        const {error:uploadError}=await client.storage.from(bucket).upload(path,file,{contentType:file.type,upsert:false});if(uploadError)throw uploadError;
-      }
-      const {error}=await client.from('newcastle_messages').insert({participant_id:myParticipant.id,body:body||null,image_path:path});
-      if(error){if(path)await client.storage.from(bucket).remove([path]);throw error;}
-      $('chat-text').value='';$('chat-file').value='';$('chat-file-name').textContent='';status('chat-send-status','Sendt!');await loadMessages();$('chat-feed').scrollTop=$('chat-feed').scrollHeight;
-    }catch(err){status('chat-send-status','Kunne ikke sende: '+(err.message||'ukjent feil'),true);}finally{setBusy(false);}
-  };
-  client.auth.getUser().then(async ({data,error})=>{if(!error&&data?.user){try{await showRoom(data.user);}catch(err){status('chat-auth-status',err.message,true);}}}).catch(()=>{});
+          await loadChatMessages();
+          if(!nearBottom)log.scrollTop=oldScroll;
+        }catch(e){likeButton.disabled=false;const err=document.createElement('span');err.className='chat-like-status';err.textContent='Kunne ikke oppdatere: '+e.message;likeButton.after(err)}
+      };
+      div.append(likeButton);log.append(div);
+    }
+    if(wasNearBottom)log.scrollTop=log.scrollHeight;else log.scrollTop=previousScrollTop;
+    chatInitialScroll=false;chatForceBottom=false;
+    if(wasNearBottom)requestAnimationFrame(()=>{log.scrollTop=log.scrollHeight});
+  }catch(e){$('chatFeedback').textContent='Kunne ikke hente chat: '+e.message}
+  finally{chatRefreshBusy=false}
+}
+async function sendChat(e){
+  e.preventDefault();if(chatBusy||!chatOpen||!myTeam)return;
+  const body=$('chatText').value.trim(),files=[...$('chatFiles').files];
+  if(!body&&!files.length){$('chatFeedback').textContent='Skriv en melding eller velg vedlegg.';return}
+  if(files.length>5){$('chatFeedback').textContent='Maks fem filer per melding.';return}
+  if(files.some(f=>f.size>50*1024*1024||!CHAT_TYPES.has(f.type))){$('chatFeedback').textContent='Ugyldig filtype eller fil over 50 MB.';return}
+  chatBusy=true;$('chatSend').disabled=true;$('chatFeedback').textContent='Sender …';
+  let messageId=null;
+  try{
+    // RLS verifies team and sender. Select is permitted only while chat is open.
+    const message=await check(await db.from('challenge_team_chat_messages').insert({team_id:myTeam,participant_id:me.id,message_text:body}).select('id').single());messageId=message.id;
+    for(let i=0;i<files.length;i++){
+      const f=files[i];$('chatFeedback').textContent=`Laster opp ${i+1} av ${files.length}: ${f.name}`;
+      const ext=(f.name.split('.').pop()||'bin').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,8);
+      const path=`${myTeam}/${messageId}/${crypto.randomUUID()}.${ext}`;
+      await check(await db.storage.from(CHAT_BUCKET).upload(path,f,{contentType:f.type,upsert:false}));
+      await check(await db.from('challenge_team_chat_attachments').insert({message_id:messageId,storage_path:path,file_name:f.name,mime_type:f.type}));
+    }
+    $('chatText').value='';$('chatFiles').value='';$('chatFileList').textContent='';$('chatFeedback').textContent='Sendt!';chatForceBottom=true;await loadChatMessages();
+  }catch(e){$('chatFeedback').textContent='Kunne ikke sende: '+e.message+(messageId?' (Meldingen kan være delvis sendt.)':'')}
+  finally{chatBusy=false;$('chatSend').disabled=false}
+}
+$('chatFiles').addEventListener('change',()=>{$('chatFileList').textContent=[...$('chatFiles').files].map(f=>f.name+' ('+(f.size/1048576).toFixed(1)+' MB)').join(' · ')});
+async function setChatOpen(open){
+  const btn=open?$('chatOpenBtn'):$('chatCloseBtn');
+  btn.disabled=true;
+  try{
+    await rpc('challenge_set_chat_open',{p_is_open:open});
+    chatConfiguredOpen=open;
+    await loadChatState();
+    tell(open?(challengeOpen?'Lagchattene er åpnet.':'Lagchattene er klargjort og åpnes for deltakerne når Christian starter Challenge.'):'Lagchattene er stengt.');
+  }catch(e){tell('Kunne ikke endre chatstatus: '+e.message,true)}
+  finally{$('chatOpenBtn').disabled=chatConfiguredOpen;$('chatCloseBtn').disabled=!chatConfiguredOpen}
+}
+ function updateMasterUI(){
+   $('masterControls').classList.toggle('hidden',!admin);
+   $('masterStatus').textContent=challengeOpen?'🟢 Challenge er STARTET':'🔒 Challenge er STENGT – deltakerne har ikke tilgang';
+   $('masterStatus').className=challengeOpen?'open':'closed';
+   $('masterButtons').classList.toggle('hidden',!isChristian);
+   $('masterOpenBtn').disabled=challengeOpen;
+   $('masterCloseBtn').disabled=!challengeOpen;
+   if(admin&&!isChristian)$('masterFeedback').textContent='Bare Christian kan bruke hovedbryteren.';
+ }
+ async function changeMasterState(next){
+   if(!isChristian)return;
+   const verb=next?'STARTE':'STOPPE';
+   if(!window.confirm(verb+' hele Newcastle Challenge for alle deltakere?'))return;
+   $('masterOpenBtn').disabled=true;$('masterCloseBtn').disabled=true;
+   $('masterFeedback').textContent='Oppdaterer hovedbryteren …';
+   try{
+     await rpc('challenge_set_open',{p_is_open:next});
+     challengeOpen=await rpc('challenge_is_open');
+     $('masterFeedback').textContent=challengeOpen?'Challenge er startet.':'Challenge er stoppet.';
+     updateMasterUI();await load();
+   }catch(e){$('masterFeedback').textContent='Kunne ikke endre hovedbryteren: '+e.message;updateMasterUI()}
+ }
+ $('masterOpenBtn').onclick=()=>changeMasterState(true);
+ $('masterCloseBtn').onclick=()=>changeMasterState(false);
+ $('gateRefresh').onclick=()=>load();
+ $('progressFilter').onchange=()=>{if(admin)renderTeamProgress()};
+$('chatForm').addEventListener('submit',sendChat);
+$('chatRefresh').onclick=loadChatMessages;
+$('chatOpenBtn').onclick=()=>setChatOpen(true);
+$('chatCloseBtn').onclick=()=>setChatOpen(false);
+setInterval(()=>{if(!document.hidden&&me&&myTeam)loadChatState().catch(e=>{$('chatFeedback').textContent=e.message})},10000);
+async function submit(event,form){event.preventDefault();const btn=form.querySelector('button');btn.disabled=true;try{const id=form.dataset.mission,answer=form.elements.answer.value.trim(),files=[...form.elements.files.files];if(!answer&&!files.length)throw Error('Skriv et svar eller legg ved fil.');if(files.length>5)throw Error('Maks fem filer.');if(files.some(f=>f.size>50*1024*1024))throw Error('Maks 50 MB per fil.');tell('Oppretter innsending …');const submissionId=await rpc('challenge_submit',{p_mission_id:id,p_answer_text:answer});for(let i=0;i<files.length;i++){const f=files[i];tell(`Laster opp ${i+1} av ${files.length}: ${f.name}`);const ext=(f.name.split('.').pop()||'bin').toLowerCase().replace(/[^a-z0-9]/g,'').slice(0,8);const path=`${myTeam}/${submissionId}/${crypto.randomUUID()}.${ext}`;await check(await db.storage.from('challenge-media').upload(path,f,{contentType:f.type,upsert:false}));await rpc('challenge_register_file',{p_submission_id:submissionId,p_storage_path:path,p_file_name:f.name,p_mime_type:f.type})}tell('Innsendingen er registrert!');await load()}catch(e){tell('Innsending feilet: '+e.message,true)}finally{btn.disabled=false}}async function review(b){b.disabled=true;try{const id=b.dataset.review,percent=Number($('percent-'+id).value),max=Number($('percent-'+id).dataset.max),status=percent===0?'rejected':'approved',points=status==='approved'?Math.round(max*percent/100):0,comment=$('comment-'+id).value;await rpc('challenge_review',{p_submission_id:id,p_status:status,p_points:points,p_comment:comment});tell('Vurderingen er lagret.');await load()}catch(e){tell('Godkjenning feilet: '+e.message,true)}finally{b.disabled=false}}$('loginBtn').onclick=async()=>{try{$('loginMsg').textContent='Logger inn …';await check(await db.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value}));$('password').value='';$('loginMsg').textContent='';await load()}catch(e){$('loginMsg').textContent=e.message}};$('logout').onclick=async()=>{await db.auth.signOut();location.reload()};$('refresh').onclick=load;load();
+// Ikke bygg oppdragsskjemaene på nytt automatisk. Det ville slettet
+// både tekst og valgte filer mens deltakeren jobbet med en innsending.
+// Poengtavle/oppdrag kan fortsatt oppdateres med Oppdater-knappen.
 })();
-</script>
-
-<script>
-// TEST: Personlige flybilletter, separat fra felles chat men med samme Supabase-økt.
-(() => {
-  'use strict';
-  const root = document.getElementById('billetter');
-  const URL = 'https://wvnrmtcaoxzmukeokcwd.supabase.co';
-  const KEY = 'sb_publishable_KgFFfr6f1eJd1azLxx-1mg_im9MjVnA';
-  const BUCKET = 'newcastle-flight-tickets';
-  const names = [
-    [1,'Sebastian Nenseth'],[2,'Benjamin Thuve'],[3,'Fritz Ryan Domingo'],[4,'Frode Hegg'],
-    [5,'Fayez Fadie'],[6,'Benjamin Johannessen'],[7,'Filips Grindulis'],[8,'Marius Horni'],
-    [9,'Sarkawt Kareemi'],[10,'Stian Abrahamsen'],[11,'Kenneth Hårsaker'],[12,'Nicklas Huse'],
-    [13,'Børre Syversen'],[14,'Sondre Thorsen'],[15,'Christian Sjøsaasen'],[16,'Petter Sørebø'],
-    [17,'Mats Hovland'],[18,'Erik Bjerke']
-  ];
-  root.innerHTML = `<article class="card"><h2>✈️ Mine flybilletter</h2><p class="muted">Din personlige flybillett er kun tilgjengelig når du er logget inn. Bruk samme PIN-innlogging som i felles chat.</p><div id="ticket-status" class="ticket-status" role="status" aria-live="polite">Kontrollerer innlogging …</div><div id="ticket-self"></div></article><article class="card" id="ticket-admin" hidden><h2>🗂️ Administrer flybilletter</h2><p class="muted">Kun for arrangører. Last opp én PDF per deltaker (maks 10 MB). En ny opplasting erstatter den tidligere billetten.</p><div id="ticket-list" class="ticket-grid"></div></article>`;
-  const $ = id => document.getElementById(id);
-  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const setStatus = (s,err=false) => { $('ticket-status').textContent=s; $('ticket-status').classList.toggle('error',err); };
-  if (!window.supabase?.createClient) {setStatus('Kunne ikke laste inn innloggingstjenesten.',true);return;}
-  const db = window.supabase.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
-  let me = null, admin = false, docs = [], busy = false;
-  const isAdmin = p => p && (p.id === 15 || p.id === 16);
-  async function refresh(){
-    const {data:{user},error:authError}=await db.auth.getUser();
-    if(authError || !user){me=null;admin=false;docs=[];$('ticket-self').replaceChildren();$('ticket-admin').hidden=true;setStatus('Logg inn under 💬 Chat, og kom tilbake hit for å se din billett.');return;}
-    const {data:p,error:pe}=await db.from('newcastle_participants').select('id,full_name').eq('auth_user_id',user.id).maybeSingle();
-    if(pe||!p){setStatus('Innlogget konto er ikke koblet til en deltaker.',true);return;}
-    me=p;admin=isAdmin(p);
-    const {data:rows,error:de}=await db.from('newcastle_flight_tickets').select('participant_id,file_path,updated_at').order('participant_id');
-    if(de){setStatus('Billetter er ikke klargjort i TEST-databasen ennå: '+de.message,true);return;}
-    docs=rows||[];
-    setStatus('Innlogget som '+me.full_name+'.');
-    renderSelf();renderAdmin();
-  }
-  async function openTicket(path){
-    // Open a tab synchronously on click so mobile browsers don't block it.
-    const tab=window.open('about:blank','_blank');
-    try{
-      const {data,error}=await db.storage.from(BUCKET).createSignedUrl(path,120);
-      if(error||!data?.signedUrl)throw Error(error?.message||'Kunne ikke åpne billetten.');
-      if(tab){tab.opener=null;tab.location.replace(data.signedUrl);}
-      else window.location.href=data.signedUrl;
-    }catch(e){if(tab)tab.close();throw e;}
-  }
-  function renderSelf(){
-    const own=docs.find(x=>x.participant_id===me.id);
-    $('ticket-self').innerHTML=own?`<div class="ticket-row"><div><strong>📄 Flybillett – ${esc(me.full_name)}</strong><small>PDF · personlig dokument</small></div><div class="ticket-actions"><button id="ticket-open-mine" type="button">Åpne billetten ↗</button></div></div>`:`<p class="muted">Din flybillett er ikke lastet opp ennå. Du får tilgang her når arrangøren har lagt den inn.</p>`;
-    if(own)$('ticket-open-mine').onclick=()=>openTicket(own.file_path).catch(e=>setStatus(e.message,true));
-  }
-  function renderAdmin(){
-    $('ticket-admin').hidden=!admin;if(!admin)return;
-    $('ticket-list').innerHTML=names.map(([id,name])=>{
-      const doc=docs.find(x=>x.participant_id===id);
-      return `<div class="ticket-row" data-ticket-id="${id}"><div><strong>${esc(name)}</strong><small class="ticket-pill ${doc?'':'missing'}">${doc?'✓ Billett lastet opp':'Mangler billett'}</small></div><div class="ticket-actions"><input class="ticket-upload" type="file" accept="application/pdf,.pdf" aria-label="Velg PDF for ${esc(name)}"><button class="ticket-save" type="button">${doc?'Erstatt PDF':'Last opp PDF'}</button>${doc?'<button class="ticket-view" type="button">Se PDF</button>':''}</div></div>`;
-    }).join('');
-    $('ticket-list').querySelectorAll('[data-ticket-id]').forEach(row=>{
-      const id=Number(row.dataset.ticketId),doc=docs.find(x=>x.participant_id===id);
-      row.querySelector('.ticket-save').onclick=()=>uploadTicket(id,row);
-      if(doc)row.querySelector('.ticket-view').onclick=()=>openTicket(doc.file_path).catch(e=>setStatus(e.message,true));
-    });
-  }
-  async function uploadTicket(id,row){
-    if(busy)return;
-    const file=row.querySelector('input[type=file]').files[0];
-    if(!file){setStatus('Velg en PDF først.',true);return;}
-    if(file.size>10*1024*1024||file.size===0||(!file.name.toLowerCase().endsWith('.pdf'))){setStatus('Velg en PDF på maksimalt 10 MB.',true);return;}
-    if(!window.confirm('Last opp billetten til '+names.find(x=>x[0]===id)[1]+'? Kontroller at PDF-en tilhører riktig person.'))return;
-    busy=true;row.querySelector('.ticket-save').disabled=true;
-    const old=docs.find(x=>x.participant_id===id);
-    const path=id+'/'+crypto.randomUUID()+'.pdf';
-    setStatus('Laster opp billett …');
-    try{
-      const {error:ue}=await db.storage.from(BUCKET).upload(path,file,{contentType:'application/pdf',upsert:false});
-      if(ue)throw ue;
-      const {error:de}=await db.from('newcastle_flight_tickets').upsert({participant_id:id,file_path:path,updated_at:new Date().toISOString()},{onConflict:'participant_id'});
-      if(de){await db.storage.from(BUCKET).remove([path]);throw de;}
-      if(old?.file_path && old.file_path!==path){const {error:removeError}=await db.storage.from(BUCKET).remove([old.file_path]);if(removeError)console.warn('Gammel billett må eventuelt slettes manuelt:',removeError.message);}
-      await refresh();setStatus('PDF lastet opp for '+names.find(x=>x[0]===id)[1]+'.');
-    }catch(e){setStatus('Opplasting feilet: '+(e.message||'ukjent feil'),true);}
-    finally{busy=false;row.querySelector('.ticket-save')?.removeAttribute('disabled');}
-  }
-  document.querySelector('[data-tab="billetter"]').addEventListener('click',()=>refresh().catch(e=>setStatus(e.message,true)));
-  db.auth.onAuthStateChange(()=>{setTimeout(()=>refresh().catch(e=>setStatus(e.message,true)),0);});
-  refresh().catch(e=>setStatus(e.message,true));
-})();
-</script>
-</body></html>
+</script></body></html>
